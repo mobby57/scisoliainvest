@@ -1,0 +1,272 @@
+{
+  "name": "SCOLIA INVEST – Schéma de Todo pour dev app",
+  "desc": "Plan de développement d'application structuré en modules avec dépendances et priorités",
+  "closed": false,
+  "idOrganization": null,
+  "pinned": false,
+  "starred": false,
+  "prefs": {
+    "permissionLevel": "private",
+    "voting": "disabled",
+    "comments": "members",
+    "invitations": "members",
+    "selfJoin": false,
+    "cardCovers": true,
+    "background": "blue",
+    "cardAging": "regular"
+  },
+  "lists": [
+    {
+      "name": "1. Infrastructure et backend",
+      "cards": [
+        {
+          "name": "Configuration du projet",
+          "desc": "Monorepo : client (frontend) + api (backend), Docker + Docker Compose (MongoDB/Postgres selon choix), CI/CD (GitHub Actions ou GitLab CI)",
+          "due": null,
+          "pos": 1,
+          "labels": ["infrastructure", "setup"]
+        },
+        {
+          "name": "Auth & sécurité",
+          "desc": "JWT + refresh tokens, Gestion multi-tenant (SCI, copropriété), Permissions par rôle (admin, propriétaire, locataire, professionnel)",
+          "due": null,
+          "pos": 2,
+          "labels": ["auth", "security", "multi-tenant"]
+        },
+        {
+          "name": "Base de données",
+          "desc": "Modèles principaux : User, Property, Transaction, SCI, Service, Task, KYC, Feedback, Relations entre entités, Index et performances",
+          "due": null,
+          "pos": 3,
+          "labels": ["database", "models"]
+        },
+        {
+          "name": "API REST / GraphQL",
+          "desc": "Auth : login, signup, roles; Gestion biens : CRUD + filtres avancés; Transactions & paiements : création, suivi, historique; Services professionnels : CRUD + mise en relation; Notifications & tâches : alertes, maintenance prédictive",
+          "due": null,
+          "pos": 4,
+          "labels": ["api", "backend"]
+        }
+      ]
+    },
+    {
+      "name": "2. Frontend",
+      "cards": [
+        {
+          "name": "Setup",
+          "desc": "React / Next.js, TailwindCSS avec palette SCOLIA, Vite / Webpack",
+          "due": null,
+          "pos": 1,
+          "labels": ["frontend", "setup"]
+        },
+        {
+          "name": "Pages & composants",
+          "desc": "Landing page + onboarding, Dashboard multi-tenant (SCI, propriétaire), Gestion des biens et locations, Paiements & factures, Réseau professionnel / annuaire, Formations et programmes sociaux, Profil utilisateur & KYC, Notifications & tâches",
+          "due": null,
+          "pos": 2,
+          "labels": ["ui", "pages"]
+        },
+        {
+          "name": "Fonctionnalités interactives",
+          "desc": "Recherche avancée de biens, Suivi des transactions, Messagerie interne / mise en relation, Maintenance prédictive et alertes",
+          "due": null,
+          "pos": 3,
+          "labels": ["features", "interactions"]
+        }
+      ]
+    },
+    {
+      "name": "3. Services avancés / modules IA",
+      "cards": [
+        {
+          "name": "Prédiction de loyer / rentabilité",
+          "desc": "",
+          "due": null,
+          "pos": 1,
+          "labels": ["ai", "prediction"]
+        },
+        {
+          "name": "Maintenance prédictive des biens",
+          "desc": "",
+          "due": null,
+          "pos": 2,
+          "labels": ["ai", "maintenance"]
+        },
+        {
+          "name": "Recommandation de services professionnels",
+          "desc": "",
+          "due": null,
+          "pos": 3,
+          "labels": ["ai", "recommendation"]
+        },
+        {
+          "name": "Analyse de marché et suggestions personnalisées",
+          "desc": "",
+          "due": null,
+          "pos": 4,
+          "labels": ["ai", "analysis"]
+        }
+      ]
+    },
+    {
+      "name": "4. Intégrations",
+      "cards": [
+        {
+          "name": "Paiement en ligne",
+          "desc": "Stripe / PayPal",
+          "due": null,
+          "pos": 1,
+          "labels": ["integration", "payment"]
+        },
+        {
+          "name": "API fiscales ou notariales",
+          "desc": "Si disponible",
+          "due": null,
+          "pos": 2,
+          "labels": ["integration", "api"]
+        },
+        {
+          "name": "Outils d'éco-responsabilité",
+          "desc": "Notation environnementale",
+          "due": null,
+          "pos": 3,
+          "labels": ["integration", "eco"]
+        },
+        {
+          "name": "Plateformes de formation et réinsertion",
+          "desc": "",
+          "due": null,
+          "pos": 4,
+          "labels": ["integration", "training"]
+        }
+      ]
+    },
+    {
+      "name": "5. Tests et qualité",
+      "cards": [
+        {
+          "name": "Backend : tests unitaires + intégration",
+          "desc": "Vitest, Jest",
+          "due": null,
+          "pos": 1,
+          "labels": ["testing", "backend"]
+        },
+        {
+          "name": "Frontend : tests UI",
+          "desc": "Playwright / Cypress",
+          "due": null,
+          "pos": 2,
+          "labels": ["testing", "frontend"]
+        },
+        {
+          "name": "API : tests Postman / Swagger",
+          "desc": "",
+          "due": null,
+          "pos": 3,
+          "labels": ["testing", "api"]
+        },
+        {
+          "name": "Monitoring & logging",
+          "desc": "Sentry, Datadog",
+          "due": null,
+          "pos": 4,
+          "labels": ["monitoring", "logging"]
+        }
+      ]
+    },
+    {
+      "name": "6. Déploiement",
+      "cards": [
+        {
+          "name": "Environnements dev, staging, prod",
+          "desc": "",
+          "due": null,
+          "pos": 1,
+          "labels": ["deployment", "environments"]
+        },
+        {
+          "name": "Docker Compose / Kubernetes",
+          "desc": "",
+          "due": null,
+          "pos": 2,
+          "labels": ["deployment", "containers"]
+        },
+        {
+          "name": "CI/CD complet",
+          "desc": "Tests + build + déploiement",
+          "due": null,
+          "pos": 3,
+          "labels": ["deployment", "ci-cd"]
+        },
+        {
+          "name": "Backup DB + gestion sécurité",
+          "desc": "",
+          "due": null,
+          "pos": 4,
+          "labels": ["deployment", "backup"]
+        }
+      ]
+    },
+    {
+      "name": "7. Roadmap prioritaire",
+      "cards": [
+        {
+          "name": "1. Backend + DB + Auth",
+          "desc": "",
+          "due": null,
+          "pos": 1,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "2. Frontend basic dashboard + login",
+          "desc": "",
+          "due": null,
+          "pos": 2,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "3. CRUD biens et transactions",
+          "desc": "",
+          "due": null,
+          "pos": 3,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "4. Paiements + multi-tenant",
+          "desc": "",
+          "due": null,
+          "pos": 4,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "5. Réseau professionnel + services",
+          "desc": "",
+          "due": null,
+          "pos": 5,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "6. IA prédictive + maintenance",
+          "desc": "",
+          "due": null,
+          "pos": 6,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "7. Modules sociaux + formation",
+          "desc": "",
+          "due": null,
+          "pos": 7,
+          "labels": ["roadmap", "priority"]
+        },
+        {
+          "name": "8. Optimisation + déploiement production",
+          "desc": "",
+          "due": null,
+          "pos": 8,
+          "labels": ["roadmap", "priority"]
+        }
+      ]
+    }
+  ]
+}
