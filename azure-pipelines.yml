@@ -1,0 +1,87 @@
+# Azure DevOps Pipeline for SCI Solia Project
+# This pipeline builds, tests, and pushes Docker images for the API and client.
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+      - README.md
+      - docs/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerRegistryServiceConnection: 'your-acr-service-connection'  # Replace with your ACR service connection name
+  imageRepository: 'scisolia'  # Replace with your image repository name
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile.backend'  # Adjust if needed
+  tag: '$(Build.BuildId)'
+
+stages:
+  - stage: BuildAndTest
+    displayName: 'Build and Test'
+    jobs:
+      - job: BuildTestAPI
+        displayName: 'Build and Test API'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              cd packages/api
+              npm ci
+              npm run build
+              npm test
+            displayName: 'Install dependencies, build, and test API'
+
+      - job: BuildTestClient
+        displayName: 'Build and Test Client'
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '18.x'
+            displayName: 'Install Node.js'
+
+          - script: |
+              cd packages/client
+              npm ci
+              npm run build
+              npm test
+            displayName: 'Install dependencies, build, and test Client'
+
+  - stage: BuildAndPushDocker
+    displayName: 'Build and Push Docker Images'
+    dependsOn: BuildAndTest
+    condition: succeeded()
+    jobs:
+      - job: BuildPushAPI
+        displayName: 'Build and Push API Image'
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(dockerRegistryServiceConnection)'
+              repository: '$(imageRepository)-api'
+              command: 'buildAndPush'
+              Dockerfile: 'Dockerfile.backend'
+              tags: |
+                $(tag)
+                latest
+            displayName: 'Build and Push API Docker Image'
+
+      - job: BuildPushClient
+        displayName: 'Build and Push Client Image'
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(dockerRegistryServiceConnection)'
+              repository: '$(imageRepository)-client'
+              command: 'buildAndPush'
+              Dockerfile: 'Dockerfile.frontend'
+              tags: |
+                $(tag)
+                latest
+            displayName: 'Build and Push Client Docker Image'
