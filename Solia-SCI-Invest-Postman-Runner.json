@@ -1,0 +1,366 @@
+{
+  "info": {
+    "name": "Solia SCI Invest - Complete Workflow",
+    "description": "Postman Runner configuration for complete SCI workflow automation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🚀 Complete SCI Workflow",
+      "item": [
+        {
+          "name": "1. Auth - Register User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Register a new user",
+                  "pm.test(\"User registered successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('message');",
+                  "  pm.expect(response.message).to.include('success');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"investor@test.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "2. Auth - Login & Get Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Login and capture auth token",
+                  "pm.test(\"Login successful\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('token');",
+                  "  pm.environment.set('authToken', response.token);",
+                  "  console.log('Auth token set:', pm.environment.get('authToken'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"investor@test.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "3. SCI - Create SCI Entity",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Create SCI and capture ID",
+                  "pm.test(\"SCI created successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('_id');",
+                  "  pm.environment.set('sciId', response._id);",
+                  "  console.log('SCI ID set:', pm.environment.get('sciId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"SCI Solia Invest\",\n  \"slug\": \"sci-invest\",\n  \"address\": \"10 avenue de l'Invest\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sci",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sci"
+              ]
+            }
+          }
+        },
+        {
+          "name": "4. Investor - Add Investor (Manual ID Required)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Add investor to SCI",
+                  "pm.test(\"Investor added successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  console.log('Investor response:', JSON.stringify(response));",
+                  "  // Note: investorId should be set manually in environment first",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{investorId}}\",\n  \"sharePercentage\": 40\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sci/{{sciId}}/associates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sci",
+                "{{sciId}}",
+                "associates"
+              ]
+            }
+          }
+        },
+        {
+          "name": "5. Property - Add Property",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Add property and capture ID",
+                  "pm.test(\"Property added successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('_id');",
+                  "  pm.environment.set('propertyId', response._id);",
+                  "  console.log('Property ID set:', pm.environment.get('propertyId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Appartement Paris\",\n  \"value\": 350000,\n  \"address\": \"25 rue Lafayette\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sci/{{sciId}}/properties",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sci",
+                "{{sciId}}",
+                "properties"
+              ]
+            }
+          }
+        },
+        {
+          "name": "6. Transaction - Add Contribution",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Add transaction and capture ID",
+                  "pm.test(\"Transaction added successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('_id');",
+                  "  pm.environment.set('transactionId', response._id);",
+                  "  console.log('Transaction ID set:', pm.environment.get('transactionId'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"contribution\",\n  \"amount\": 50000,\n  \"date\": \"2025-08-24\",\n  \"description\": \"Apport initial\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sci/{{sciId}}/transactions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sci",
+                "{{sciId}}",
+                "transactions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "7. KYC - Create Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Create KYC profile and capture ID",
+                  "pm.test(\"KYC profile created successfully\", function() {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "  const response = pm.response.json();",
+                  "  pm.expect(response).to.have.property('_id');",
+                  "  pm.environment.set('kycProfileId', response._id);",
+                  "  console.log('KYC Profile ID set:', pm.environment.get('kycProfileId'));",
+                  "  console.log('✅ Complete workflow executed successfully!');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{investorId}}\",\n  \"type\": \"individual\",\n  \"status\": \"pending\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/kyc/profiles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "kyc",
+                "profiles"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000/api"
+    },
+    {
+      "key": "authToken",
+      "value": ""
+    },
+    {
+      "key": "sciId",
+      "value": ""
+    },
+    {
+      "key": "investorId",
+      "value": "REPLACE_WITH_ACTUAL_USER_ID"
+    },
+    {
+      "key": "propertyId",
+      "value": ""
+    },
+    {
+      "key": "transactionId",
+      "value": ""
+    },
+    {
+      "key": "kycProfileId",
+      "value": ""
+    }
+  ]
+}
