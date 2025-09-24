@@ -1,0 +1,176 @@
+{
+  "name": "Solia Invest - 30 Day Development Plan",
+  "desc": "Complete 30-day roadmap for building multi-tenant SCI platform with KYC functionality",
+  "lists": [
+    {
+      "name": "Week 1 - Setup & Foundations",
+      "cards": [
+        {
+          "name": "Day 1: Initialize monorepo structure",
+          "desc": "Set up packages/api and packages/client structure with proper tooling\n- Initialize monorepo with Lerna or Nx\n- Configure TypeScript for both backend and frontend\n- Set up ESLint and Prettier configurations\n- Create package.json scripts for development",
+          "labels": ["setup", "backend", "frontend"]
+        },
+        {
+          "name": "Day 2: Configure MongoDB/Postgres Docker",
+          "desc": "Set up database containers and connection management\n- Create docker-compose.yml for MongoDB\n- Configure environment variables for database connections\n- Set up connection pooling and retry logic\n- Test database connectivity",
+          "labels": ["infrastructure", "database"]
+        },
+        {
+          "name": "Day 3: Install Prisma/Mongoose schemas",
+          "desc": "Generate User, Tenant, and related schema models\n- Define User model with authentication fields\n- Create Tenant model with multi-tenant support\n- Set up relationships between models\n- Configure database migrations",
+          "labels": ["database", "models"]
+        },
+        {
+          "name": "Day 4: Implement JWT Auth (login/register)",
+          "desc": "Create authentication endpoints with JWT tokens\n- Implement /auth/register endpoint\n- Create /auth/login endpoint with JWT\n- Add password hashing with bcrypt\n- Set up refresh token mechanism",
+          "labels": ["auth", "backend", "security"]
+        },
+        {
+          "name": "Day 5: Create SCI schema models",
+          "desc": "Define Tenant/Part relationships and SCI resource models\n- Create SCIResource model\n- Define SCIShare model for ownership\n- Set up relationships between SCI and Tenant\n- Add validation rules for SCI data",
+          "labels": ["models", "sci"]
+        },
+        {
+          "name": "Day 6: Create KYC schema models",
+          "desc": "Define KYCProfile and KycDocument schemas\n- Create KYCProfile model with status tracking\n- Define KycDocument model for file uploads\n- Set up document validation rules\n- Configure file storage for documents",
+          "labels": ["models", "kyc"]
+        },
+        {
+          "name": "Day 7: CRUD routes for Users/Tenants",
+          "desc": "Complete REST API endpoints with proper validation\n- Implement GET /api/users endpoints\n- Create POST /api/tenants endpoint\n- Add PUT/PATCH endpoints for updates\n- Implement DELETE endpoints with soft delete",
+          "labels": ["api", "backend"]
+        }
+      ]
+    },
+    {
+      "name": "Week 2 - SCI & KYC Modules",
+      "cards": [
+        {
+          "name": "Day 8: SCI CRUD routes",
+          "desc": "Complete SCI creation, update, delete endpoints\n- POST /api/sci-resources for creation\n- GET /api/sci-resources for listing\n- PUT /api/sci-resources/:id for updates\n- DELETE /api/sci-resources/:id for removal",
+          "labels": ["api", "sci"]
+        },
+        {
+          "name": "Day 9: KYC routes (submit/status/update)",
+          "desc": "Implement KYC submission and status management\n- POST /api/kyc/submit for KYC submission\n- GET /api/kyc/status/:userId for status checking\n- PUT /api/kyc/update/:id for updates\n- Add file upload handling for documents",
+          "labels": ["api", "kyc"]
+        },
+        {
+          "name": "Day 10: Multi-tenant relationships",
+          "desc": "Implement tenant isolation and data relationships\n- Add tenant middleware for request isolation\n- Implement tenant-scoped queries\n- Create tenant-specific data filtering\n- Test multi-tenant data separation",
+          "labels": ["multi-tenant", "backend"]
+        },
+        {
+          "name": "Day 11: Admin middleware & permissions",
+          "desc": "Implement role-based access control for admin features\n- Create admin middleware for route protection\n- Define user roles (admin, user, collector)\n- Implement permission checking\n- Add role-based route restrictions",
+          "labels": ["auth", "admin", "rbac"]
+        },
+        {
+          "name": "Day 12: Donation/interaction management",
+          "desc": "Create donation tracking and interaction workflows\n- Implement Donation model\n- Create interaction tracking system\n- Add donation receipt generation\n- Set up interaction notifications",
+          "labels": ["donations", "interactions"]
+        },
+        {
+          "name": "Day 13: UI components & forms",
+          "desc": "Build reusable React components for SCI and KYC forms\n- Create SCI creation form component\n- Build KYC submission form\n- Implement form validation with React Hook Form\n- Add file upload components",
+          "labels": ["frontend", "ui"]
+        },
+        {
+          "name": "Day 14: Data seeding & validation",
+          "desc": "Create development data and test validation rules\n- Generate seed data for testing\n- Create validation schemas with Zod/Yup\n- Add data validation middleware\n- Test all validation rules",
+          "labels": ["testing", "data"]
+        }
+      ]
+    },
+    {
+      "name": "Week 3 - Admin & Integration",
+      "cards": [
+        {
+          "name": "Day 15: Admin dashboard routes",
+          "desc": "Create admin endpoints for KYC approval and SCI management\n- GET /api/admin/kyc/pending for pending reviews\n- POST /api/admin/kyc/approve/:id for approvals\n- GET /api/admin/sci-resources for management\n- Add admin analytics endpoints",
+          "labels": ["admin", "api"]
+        },
+        {
+          "name": "Day 16: Backend notifications",
+          "desc": "Implement notification system for KYC approvals and updates\n- Create notification service\n- Implement email notifications\n- Add in-app notification system\n- Set up notification preferences",
+          "labels": ["notifications", "backend"]
+        },
+        {
+          "name": "Day 17: Collector/Donor routes",
+          "desc": "Create endpoints for collector and donor workflows\n- POST /api/collectors/register for collector registration\n- GET /api/donations/history for donation tracking\n- Implement donation processing endpoints\n- Add donor management features",
+          "labels": ["api", "donations"]
+        },
+        {
+          "name": "Day 18: Complex multi-tenant relations",
+          "desc": "Implement advanced tenant data relationships and queries\n- Create complex tenant queries\n- Implement cross-tenant reporting\n- Add tenant-specific analytics\n- Optimize tenant data access",
+          "labels": ["multi-tenant", "backend"]
+        },
+        {
+          "name": "Day 19: Database optimization",
+          "desc": "Add indexes and optimize queries for performance\n- Create database indexes for common queries\n- Optimize slow queries\n- Add query performance monitoring\n- Implement caching strategies",
+          "labels": ["performance", "database"]
+        },
+        {
+          "name": "Day 20: Logging & audit backend",
+          "desc": "Implement comprehensive logging and audit trail\n- Set up structured logging with Winston\n- Create audit log models\n- Implement audit trail for all actions\n- Add log analysis capabilities",
+          "labels": ["logging", "audit", "backend"]
+        },
+        {
+          "name": "Day 21: Frontend integration completion",
+          "desc": "Complete frontend-backend integration and validation\n- Integrate all API endpoints with frontend\n- Add error handling for API calls\n- Implement loading states and error messages\n- Test complete user workflows",
+          "labels": ["integration", "frontend"]
+        }
+      ]
+    },
+    {
+      "name": "Week 4 - Stabilization & Deployment",
+      "cards": [
+        {
+          "name": "Day 22: Error handling",
+          "desc": "Implement comprehensive error handling for 500/404 responses\n- Create global error handler middleware\n- Add custom error classes\n- Implement error logging and monitoring\n- Create user-friendly error messages",
+          "labels": ["error-handling", "backend"]
+        },
+        {
+          "name": "Day 23: Security optimization",
+          "desc": "Enhance JWT security, CORS configuration, and access controls\n- Implement rate limiting\n- Add security headers\n- Configure CORS properly\n- Add input sanitization",
+          "labels": ["security", "backend"]
+        },
+        {
+          "name": "Day 24: Code cleanup & refactoring",
+          "desc": "Refactor code for maintainability and reusability\n- Clean up duplicate code\n- Extract common utilities\n- Improve code organization\n- Add code comments and documentation",
+          "labels": ["refactoring", "code-quality"]
+        },
+        {
+          "name": "Day 25: Docker production setup",
+          "desc": "Configure Docker containers for production deployment\n- Create production Dockerfile\n- Set up docker-compose for production\n- Configure environment variables\n- Add health checks",
+          "labels": ["docker", "deployment"]
+        },
+        {
+          "name": "Day 26: CI/CD pipeline",
+          "desc": "Set up GitHub Actions for automated testing and deployment\n- Create GitHub Actions workflows\n- Set up automated testing\n- Configure deployment pipeline\n- Add staging environment",
+          "labels": ["ci-cd", "devops"]
+        },
+        {
+          "name": "Day 27: Final backend testing",
+          "desc": "Complete unit and integration testing for all backend endpoints\n- Write comprehensive unit tests\n- Add integration tests for all endpoints\n- Test edge cases and error scenarios\n- Achieve 80%+ test coverage",
+          "labels": ["testing", "backend"]
+        },
+        {
+          "name": "Day 28: Bug fixes & feedback",
+          "desc": "Address bugs from testing and implement feedback\n- Fix identified bugs\n- Implement user feedback\n- Update documentation\n- Prepare for production",
+          "labels": ["bug-fixes", "feedback"]
+        },
+        {
+          "name": "Day 29: Documentation",
+          "desc": "Create developer and user documentation\n- Write API documentation with Swagger\n- Create user guides\n- Add inline code documentation\n- Create deployment guides",
+          "labels": ["documentation"]
+        },
+        {
+          "name": "Day 30: Production deployment",
+          "desc": "Deploy to production with monitoring and health checks\n- Deploy to production environment\n- Set up monitoring with health checks\n- Configure error tracking\n- Set up backup procedures",
+          "labels": ["deployment", "production"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "name": "Solia Invest - 30 Day Development Plan",
+  "desc": "Complete 30-day roadmap for building multi-tenant SCI platform with KYC functionality",
+  "closed": false,
+  "idOrganization": null,
+  "pinned": true,
+  "starred": true,
+  "prefs": {
+    "permissionLevel": "private",
+    "voting": "disabled",
+    "comments": "members",
+    "invitations": "members",
+    "selfJoin": false,
+    "cardCovers": true,
+    "background": "blue",
+    "cardAging": "regular"
+  },
+  "lists": [
+    {
+      "name": "Week 1 - Setup & Foundations",
+      "cards": [
+        {
+          "name": "Day 1: Initialize monorepo structure",
+          "desc": "Set up packages/api and packages/client structure with proper tooling",
+          "due": null,
+          "pos": 1,
+          "labels": ["setup", "backend", "frontend"]
+        },
+        {
+          "name": "Day 2: Configure MongoDB/Postgres Docker",
+          "desc": "Set up database containers and connection management",
+          "due": null,
+          "pos": 2,
+          "labels": ["infrastructure", "database"]
+        },
+        {
+          "name": "Day 3: Install Prisma/Mongoose schemas",
+          "desc": "Generate User, Tenant, and related schema models",
+          "due": null,
+          "pos": 3,
+          "labels": ["database", "models"]
+        },
+        {
+          "name": "Day 4: Implement JWT Auth (login/register)",
+          "desc": "Create authentication endpoints with JWT tokens",
+          "due": null,
+          "pos": 4,
+          "labels": ["auth", "backend", "security"]
+        },
+        {
+          "name": "Day 5: Create SCI schema models",
+          "desc": "Define Tenant/Part relationships and SCI resource models",
+          "due": null,
+          "pos": 5,
+          "labels": ["models", "sci"]
+        },
+        {
+          "name": "Day 6: Create KYC schema models",
+          "desc": "Define KYCProfile and KycDocument schemas",
+          "due": null,
+          "pos": 6,
+          "labels": ["models", "kyc"]
+        },
+        {
+          "name": "Day 7: CRUD routes for Users/Tenants",
+          "desc": "Complete REST API endpoints with proper validation",
+          "due": null,
+          "pos": 7,
+          "labels": ["api", "backend"]
+        }
+      ]
+    },
+    {
+      "name": "Week 2 - SCI & KYC Modules",
+      "cards": [
+        {
+          "name": "Day 8: SCI CRUD routes",
+          "desc": "Complete SCI creation, update, delete endpoints",
+          "due": null,
+          "pos": 1,
+          "labels": ["api", "sci"]
+        },
+        {
+          "name": "Day 9: KYC routes (submit/status/update)",
+          "desc": "Implement KYC submission and status management",
+          "due": null,
+          "pos": 2,
+          "labels": ["api", "kyc"]
+        },
+        {
+          "name": "Day 10: Multi-tenant relationships",
+          "desc": "Implement tenant isolation and data relationships",
+          "due": null,
+          "pos": 3,
+          "labels": ["multi-tenant", "backend"]
+        },
+        {
+          "name": "Day 11: Admin middleware & permissions",
+          "desc": "Implement role-based access control for admin features",
+          "due": null,
+          "pos": 4,
+          "labels": ["auth", "admin", "rbac"]
+        },
+        {
+          "name": "Day 12: Donation/interaction management",
+          "desc": "Create donation tracking and interaction workflows",
+          "due": null,
+          "pos": 5,
+          "labels": ["donations", "interactions"]
+        },
+        {
+          "name": "Day 13: UI components & forms",
+          "desc": "Build reusable React components for SCI and KYC forms",
+          "due": null,
+          "pos": 6,
+          "labels": ["frontend", "ui"]
+        },
+        {
+          "name": "Day 14: Data seeding & validation",
+          "desc": "Create development data and test validation rules",
+          "due": null,
+          "pos": 7,
+          "labels": ["testing", "data"]
+        }
+      ]
+    },
+    {
+      "name": "Week 3 - Admin & Integration",
+      "cards": [
+        {
+          "name": "Day 15: Admin dashboard routes",
+          "desc": "Create admin endpoints for K
