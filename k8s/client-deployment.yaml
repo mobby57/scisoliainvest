@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solia-client-deployment
+  labels:
+    app: solia-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solia-client
+  template:
+    metadata:
+      labels:
+        app: solia-client
+    spec:
+      containers:
+        - name: client
+          image: moros/solia-client:latest
+          ports:
+            - containerPort: 5173
+          env:
+            - name: VITE_API_URL
+              value: "http://solia-api-service/api"

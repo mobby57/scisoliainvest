@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  api:
+    build: 
+      context: ./packages/api
+      dockerfile: Dockerfile
+    container_name: sci-api
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    networks:
+      - sci-network
+    depends_on:
+      - postgres
+      - mongodb
+
+  client:
+    build:
+      context: .
+      dockerfile: ./packages/client/Dockerfile
+    container_name: sci-client
+    volumes:
+      - client-dist:/app/dist
+    networks:
+      - sci-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: sci-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/certs:/etc/nginx/certs
+      - client-dist:/usr/share/nginx/html
+    depends_on:
+      - client
+      - api
+    networks:
+      - sci-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: sci-postgres
+    environment:
+      POSTGRES_DB: sci_solia_invest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sci-network
+
+  mongodb:
+    image: mongo:6-alpine
+    container_name: sci-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - sci-network
+
+volumes:
+  client-dist:
+  postgres_data:
+  mongodb_data:
+
+networks:
+  sci-network:
+    driver: bridge

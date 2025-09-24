@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solia-api-deployment
+  labels:
+    app: solia-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: solia-api
+  template:
+    metadata:
+      labels:
+        app: solia-api
+    spec:
+      containers:
+        - name: api
+          image: moros/solia-api:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: DATABASE_URL
+              value: "mongodb://moros:soliapass@mongo-service:27017/solia-dev?authSource=admin"
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: jwt_secret
+            - name: NODE_ENV
+              value: "production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: solia-api-service
+spec:
+  selector:
+    app: solia-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
