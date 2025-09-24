@@ -1,0 +1,25 @@
+{
+  "inputs": [
+    {
+      "id": "ado_org",
+      "type": "promptString",
+      "description": "Azure DevOps organization name (ex: 'scisolia')"
+    }
+  ],
+  "servers": {
+    "ado_solia": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure-devops/mcp@next",
+        "${input:ado_org}",
+        "-d",
+        "core",
+        "work",
+        "work-items",
+        "pipelines"
+      ]
+    }
+  }
+}
