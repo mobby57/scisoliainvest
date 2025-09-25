@@ -1,5 +1,5 @@
 # Étape 1 : Build et préparer l'API avec npm
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copier uniquement les fichiers nécessaires pour l'install
@@ -15,7 +15,7 @@ COPY . .
 RUN npx prisma generate
 
 # Étape 2 : Image finale pour l'API
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 
 # Installer curl pour healthcheck
