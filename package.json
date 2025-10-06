@@ -1,14 +1,17 @@
 {
   "name": "sci-solia-invest",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "SCI Solia Invest Platform",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "concurrently \"pnpm --filter api dev\" \"pnpm --filter client dev\"",
-    "build": "pnpm --filter client build && pnpm --filter api build",
-    "test": "pnpm --filter client test && pnpm --filter api test",
+    "build": "pnpm --filter api build && pnpm --filter client build",
+    "build:css": "pnpm exec tailwindcss -i ./packages/client/src/index.css -o ./packages/client/dist/tailwind.css",
+    "build:css:watch": "npx tailwindcss -i ./packages/client/src/index.css -o ./packages/client/dist/tailwind.css --watch",
+    "test": "vitest run",
     "test:unit": "pnpm --filter api test && pnpm --filter client test:unit",
-    "test:e2e": "pnpm --filter client test:e2e && newman run SCI_Solia_Invest_Tests.postman_collection.json",
+    "test:e2e": "playwright test",
     "test:database": "pnpm --filter api test -- tests/database.test.ts",
     "test:setup": "bash scripts/setup-test-db.sh",
     "test:setup:windows": "scripts\\setup-test-db.bat",
@@ -16,9 +19,11 @@
     "test:all": "bash scripts/run-all-tests.sh",
     "test:all:windows": "powershell -ExecutionPolicy Bypass -File scripts/run-tests.ps1",
     "test:coverage": "pnpm --filter api test:coverage && pnpm --filter client test:coverage",
-    "test:report": "node scripts/generate-test-report.js",
-    "lint": "pnpm --filter client lint && pnpm --filter api lint",
-    "validate": "pnpm --filter client validate && pnpm --filter api validate"
+    "test:report": "vitest run --reporter=html",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --check .",
+    "test:ci": "vitest run --coverage",
+    "db:migrate": "prisma migrate deploy"
   },
   "keywords": [
     "investment",
@@ -29,12 +34,19 @@
   "author": "SCI Solia",
   "license": "MIT",
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.3.1",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",
+    "@types/twilio": "^3.19.3",
     "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^8.2.2",
+    "postcss": "^8.5.6",
+    "prisma": "^6.16.2",
+    "tailwindcss": "^4.1.13",
     "vitest": "^3.2.4"
   },
   "dependencies": {
@@ -45,6 +57,5 @@
     "node-fetch": "^2.7.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
-  },
-  "type": "commonjs"
+  }
 }
