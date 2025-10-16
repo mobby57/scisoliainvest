@@ -1,31 +1,17 @@
-# SCOLIA INVEST Starter Implementation Plan
+# TODO: Fix TypeScript Compilation Errors in packages/api
 
-## Backend Updates
-- [ ] Update User model to include 'name' field and define roles
-- [ ] Modify auth.js to use Mongoose, add /login-auto endpoint
-- [ ] Update seed-dev.js with demo users for all roles
+## Completed
+- [ ] Analyze files and create plan
+- [ ] Get user approval
 
-## Frontend Updates
-- [ ] Add loginAuto function in AuthContext
-- [ ] Create DashboardInvestor component
-- [ ] Create DashboardOwner component
-- [ ] Create DashboardTenant component
-- [ ] Create DashboardAdmin component
-- [ ] Update App.tsx for role-based routing
-- [ ] Add demo login buttons
-
-## Testing & Followup
-- [ ] Run seed script
-- [ ] Test login-auto endpoint
-- [ ] Build and test frontend
-
-# TODO: Fix Missing Dependencies and Docker Rebuild
-
-## Steps to Complete
-- [x] Install dependencies using pnpm install at root (workspace)
-- [ ] Rebuild backend Docker container (Docker not running, requires starting Docker Desktop)
-- [x] Install depcheck globally
-- [x] Run depcheck in packages/api to detect missing dependencies
-- [x] Run depcheck in packages/client to detect missing dependencies
-- [x] Review and install any additional missing dependencies found
-- [x] Note: Consider upgrading Node version in Docker image from v18 to v20 LTS for Vite compatibility
+## In Progress
+- [ ] Fix packages/api/src/types/auth.ts: Remove duplicate permissions
+- [ ] Fix packages/api/models/User.ts: Add kycStatus and kycDocuments to IUserProfile
+- [ ] Fix packages/api/src/services/audit.service.ts: Rename resourceType to entityType
+- [ ] Fix packages/api/src/controllers/sci.controller.ts: Convert BigInt(id) to string, standardize casing, remove duplicate function
+- [ ] Fix packages/api/src/controllers/document.controller.ts: Correct audit service import path
+- [ ] Fix packages/api/src/routes/sci.routes.ts: Correct authMiddleware import path
+- [ ] Create packages/api/models/Notification.ts: New Mongoose model for notifications
+- [ ] Fix test files: Correct jwtMock import paths
+- [ ] Run npx prisma generate
+- [ ] Run pnpm build to verify fixes
