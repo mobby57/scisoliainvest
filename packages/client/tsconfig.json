@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "../../",
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@solia/shared/*": [
+        "packages/shared/src/*"
+      ]
+    },
+    "types": ["vite/client", "node", "vitest"]
+  },
+  "include": [
+    "src/**/*",
+    "models/**/*"
+  ],
+  "exclude": [
+    "cypress",
+    "cypress/**/*",
+    "node_modules",
+    "dist"
+  ]
+}
