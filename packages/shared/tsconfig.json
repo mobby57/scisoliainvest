@@ -1,0 +1,27 @@
+{ 
+  "compilerOptions": {
+    // --- Priorité haute ---
+    "strict": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    // --- Priorité moyenne ---
+    "declaration": true,
+    "lib": ["ES2020"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*",
+    "types/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
+}
