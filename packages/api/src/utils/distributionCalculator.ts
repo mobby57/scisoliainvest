@@ -1,4 +1,5 @@
 import type { Associate } from '../sci/sci.types.js';
+import { telemetry } from '/shared/telemetry/telemetry';
 
 interface DistributionLine {
   associateId: string;
@@ -6,6 +7,7 @@ interface DistributionLine {
 }
 
 export const calculateDistribution = (associates: Associate[], totalAmount: number): DistributionLine[] => {
+  return telemetry.metric_distribution_calculate.run(async span => {
   try {
     if (!associates || associates.length === 0) {
       throw new Error('No associates provided for distribution');
@@ -28,4 +30,5 @@ export const calculateDistribution = (associates: Associate[], totalAmount: numb
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     throw new Error(`Error calculating distribution: ${errorMessage}`);
   }
+  }); // telemetry wrapper end
 };

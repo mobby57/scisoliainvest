@@ -1,0 +1,16 @@
+{
+  "metric_distribution_calculate": {
+    "description": "Auto-generated metric distribution_calculate",
+    "fields": {
+      "result": {
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "tenantId": {
+        "type": "string"
+      }
+    }
+  }
+}
