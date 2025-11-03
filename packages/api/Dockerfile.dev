@@ -1,0 +1,35 @@
+FROM node:18-alpine
+
+# Installer les dépendances système nécessaires
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    git \
+    curl
+
+# Créer le répertoire de l'application
+WORKDIR /app
+
+# Copier les fichiers de configuration
+COPY package*.json ./
+COPY tsconfig*.json ./
+
+# Installer les dépendances
+RUN npm install && npm cache clean --force
+
+# Copier le code source
+COPY . .
+
+# Créer les dossiers nécessaires
+RUN mkdir -p uploads/documents uploads/avatars uploads/kyc uploads/temp logs
+
+# Exposer le port
+EXPOSE 3000
+
+# Variables d'environnement par défaut
+ENV NODE_ENV=development
+ENV PORT=3000
+
+# Commande de démarrage en mode développement
+CMD ["npm", "run", "dev"]
