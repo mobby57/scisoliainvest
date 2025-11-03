@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Générateur d'icônes SCI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        canvas { border: 1px solid #ccc; margin: 10px; border-radius: 4px; }
+        .download-link { 
+            display: inline-block; 
+            margin: 10px; 
+            padding: 10px 20px; 
+            background: #1e40af; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .download-link:hover { background: #1d4ed8; }
+        .icon-section { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Générateur d'icônes PWA - SCI Solia Invest</h1>
+        
+        <div class="icon-section">
+            <h2>Icône 192x192</h2>
+            <canvas id="canvas192" width="192" height="192"></canvas>
+            <br>
+            <a id="download192" class="download-link" href="#" download="icon-192.png">📥 Télécharger 192x192</a>
+        </div>
+        
+        <div class="icon-section">
+            <h2>Icône 512x512</h2>
+            <canvas id="canvas512" width="512" height="512" style="max-width: 192px; max-height: 192px;"></canvas>
+            <br>
+            <a id="download512" class="download-link" href="#" download="icon-512.png">📥 Télécharger 512x512</a>
+        </div>
+    </div>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            
+            // Fond bleu
+            ctx.fillStyle = '#1e40af';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Texte "SCI"
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${Math.floor(size/4)}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('SCI', size/2, size/2 - size/12);
+            
+            // Sous-texte "INVEST"
+            ctx.font = `${Math.floor(size/12)}px Arial`;
+            ctx.fillText('INVEST', size/2, size/2 + size/8);
+            
+            // Bordure décorative
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(size*0.1, size*0.1, size*0.8, size*0.8);
+        }
+
+        function setupDownload(canvasId, downloadId) {
+            const canvas = document.getElementById(canvasId);
+            const downloadLink = document.getElementById(downloadId);
+            
+            downloadLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dataURL = canvas.toDataURL('image/png');
+                
+                const link = document.createElement('a');
+                link.href = dataURL;
+                link.download = downloadLink.getAttribute('download');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+
+        // Initialisation
+        window.addEventListener('load', function() {
+            const canvas192 = document.getElementById('canvas192');
+            const canvas512 = document.getElementById('canvas512');
+            
+            drawIcon(canvas192, 192);
+            drawIcon(canvas512, 512);
+            
+            setupDownload('canvas192', 'download192');
+            setupDownload('canvas512', 'download512');
+            
+            console.log('✅ Icônes générées ! Cliquez pour télécharger.');
+        });
+    </script>
+</body>
+</html>

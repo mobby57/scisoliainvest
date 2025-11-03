@@ -1,0 +1,11 @@
+{
+  "name": "cognito-setup",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "node setup-cognito.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity": "^3.0.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.0.0"
+  }
+}

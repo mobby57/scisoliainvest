@@ -1,0 +1,47 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "RDSPropertyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "rds:DescribeDBInstances",
+        "rds:Connect"
+      ],
+      "Resource": "arn:aws:rds:${aws:RequestedRegion}:${aws:PrincipalAccount}:db:sci-properties-*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": ["us-east-1", "eu-west-1"]
+        }
+      }
+    },
+    {
+      "Sid": "S3PropertyDocuments",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::sci-property-documents/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-server-side-encryption": "AES256"
+        },
+        "Bool": {
+          "aws:SecureTransport": "true"
+        }
+      }
+    },
+    {
+      "Sid": "S3BucketList",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::sci-property-documents",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": "properties/*"
+        }
+      }
+    }
+  ]
+}

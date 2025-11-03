@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:*",
+        "timestream:*",
+        "s3:*",
+        "lambda:*",
+        "dynamodb:*",
+        "cloudwatch:*",
+        "logs:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "aws:RequestedRegion": "*"
+        }
+      }
+    }
+  ]
+}

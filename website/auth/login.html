@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - SCI Solia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="../assets/js/auth.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full space-y-8 p-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-blue-600 mb-2">SCI Solia</h1>
+            <h2 class="text-xl font-semibold text-gray-900">Connexion à votre compte</h2>
+            <p class="text-gray-600">Accédez à votre tableau de bord d'investissement</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <form id="loginForm" class="space-y-6">
+                <div id="errorMessage" class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Adresse email
+                    </label>
+                    <input type="email" id="email" name="email" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="votre@email.com">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        Mot de passe
+                    </label>
+                    <input type="password" id="password" name="password" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="••••••••">
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 text-sm text-gray-600">Se souvenir de moi</span>
+                    </label>
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-500">
+                        Mot de passe oublié ?
+                    </a>
+                </div>
+
+                <button type="submit" id="loginBtn"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    <span id="loginBtnText">Se connecter</span>
+                    <i id="loginSpinner" class="fas fa-spinner fa-spin hidden ml-2"></i>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-gray-600">
+                    Pas encore de compte ?
+                    <a href="register.html" class="text-blue-600 hover:text-blue-500 font-medium">
+                        Créer un compte
+                    </a>
+                </p>
+            </div>
+
+            <!-- Demo credentials -->
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800 font-medium mb-2">Compte de démonstration :</p>
+                <p class="text-sm text-blue-700">Email: demo@scisolia.com</p>
+                <p class="text-sm text-blue-700">Mot de passe: demo123</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loginBtn = document.getElementById('loginBtn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtnText.textContent = 'Connexion...';
+            loginSpinner.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            
+            try {
+                const formData = new FormData(e.target);
+                const email = formData.get('email');
+                const password = formData.get('password');
+                
+                // Demo login logic
+                if (email === 'demo@scisolia.com' && password === 'demo123') {
+                    // Create demo token
+                    const demoToken = btoa(JSON.stringify({
+                        userId: 'demo-user',
+                        email: 'demo@scisolia.com',
+                        role: 'INVESTOR',
+                        exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60) // 24h
+                    }));
+                    
+                    localStorage.setItem('sci_solia_token', `demo.${demoToken}.signature`);
+                    localStorage.setItem('sci_solia_user', JSON.stringify({
+                        id: 'demo-user',
+                        email: 'demo@scisolia.com',
+                        name: 'Utilisateur Démo',
+                        role: 'INVESTOR'
+                    }));
+                    
+                    window.location.href = '../dashboard/index.html';
+                    return;
+                }
+                
+                // Real login attempt
+                await window.authService.login(email, password);
+                window.location.href = '../dashboard/index.html';
+                
+            } catch (error) {
+                errorMessage.textContent = error.message || 'Erreur de connexion';
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                loginBtn.disabled = false;
+                loginBtnText.textContent = 'Se connecter';
+                loginSpinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

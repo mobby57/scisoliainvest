@@ -1,0 +1,198 @@
+{
+  "title": "Bonnes Pratiques IAM pour SCI Soliai Invest",
+  "overview": "Ce document définit les bonnes pratiques de gestion des permissions AWS IAM pour la plateforme SCI Soliai Invest, en suivant le principe de gestion par groupes plutôt que par utilisateurs individuels.",
+  "groups": {
+    "development": {
+      "SCI-Developers-Dev": "Accès complet environnement de développement",
+      "SCI-Developers-Staging": "Accès lecture/écriture staging",
+      "SCI-Frontend-Devs": "Accès spécifique aux ressources frontend (S3, CloudFront)",
+      "SCI-Backend-Devs": "Accès aux services backend (RDS, Lambda, API Gateway)"
+    },
+    "operations": {
+      "SCI-DevOps-Prod": "Gestion infrastructure production",
+      "SCI-Monitoring": "Accès CloudWatch, X-Ray pour surveillance",
+      "SCI-Database-Admins": "Gestion RDS PostgreSQL et backups"
+    },
+    "business": {
+      "SCI-Business-Analysts": "Accès lecture aux données analytics",
+      "SCI-Finance-Team": "Accès aux rapports financiers et billing",
+      "SCI-Support-Team": "Accès limité pour support client"
+    }
+  },
+  "managedPolicies": {
+    "SCI-Developers-Dev": [
+      "PowerUserAccess",
+      "IAMReadOnlyAccess"
+    ],
+    "SCI-DevOps-Prod": [
+      "EC2FullAccess",
+      "RDSFullAccess",
+      "S3FullAccess",
+      "CloudWatchFullAccess"
+    ],
+    "SCI-Frontend-Devs": [
+      "AmazonS3FullAccess",
+      "CloudFrontFullAccess"
+    ]
+  },
+  "customPolicies": {
+    "iotSensorsPolicy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "iot:Publish",
+            "iot:Subscribe",
+            "iot:Connect"
+          ],
+          "Resource": "arn:aws:iot:*:*:topic/sci/properties/*/sensors/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "timestream:WriteRecords",
+            "timestream:DescribeTable"
+          ],
+          "Resource": "arn:aws:timestream:*:*:database/SCI-SensorData/*"
+        }
+      ]
+    },
+    "propertyDataPolicy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "rds:DescribeDBInstances",
+            "rds:Connect"
+          ],
+          "Resource": "arn:aws:rds:*:*:db:sci-properties-*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetObject",
+            "s3:PutObject"
+          ],
+          "Resource": "arn:aws:s3:::sci-property-documents/*"
+        }
+      ]
+    },
+    "environmentTagsPolicy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "*",
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:RequestedRegion": ["eu-west-1", "eu-central-1"],
+              "ec2:ResourceTag/Environment": ["dev", "staging"]
+            }
+          }
+        }
+      ]
+    },
+    "tenantDataPolicy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:Query"
+          ],
+          "Resource": "arn:aws:dynamodb:*:*:table/SCI-*",
+          "Condition": {
+            "ForAllValues:StringEquals": {
+              "dynamodb:Attributes": ["tenantId", "propertyId", "investorId"]
+            }
+          }
+        }
+      ]
+    },
+    "emergencyRolePolicy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::ACCOUNT:user/emergency.user"
+          },
+          "Action": "sts:AssumeRole",
+          "Condition": {
+            "StringEquals": {
+              "sts:ExternalId": "SCI-EMERGENCY-2024"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "roleMapping": {
+    "Lead Developer": {
+      "primary": "SCI-Developers-Dev",
+      "secondary": ["SCI-DevOps-Prod"]
+    },
+    "Frontend Dev": {
+      "primary": "SCI-Frontend-Devs",
+      "secondary": ["SCI-Developers-Dev"]
+    },
+    "Backend Dev": {
+      "primary": "SCI-Backend-Devs",
+      "secondary": ["SCI-Developers-Dev"]
+    },
+    "DevOps Engineer": {
+      "primary": "SCI-DevOps-Prod",
+      "secondary": ["SCI-Monitoring"]
+    },
+    "Data Analyst": {
+      "primary": "SCI-Business-Analysts",
+      "secondary": []
+    },
+    "Support": {
+      "primary": "SCI-Support-Team",
+      "secondary": []
+    }
+  },
+  "procedures": {
+    "createGroups": [
+      "aws iam create-group --group-name SCI-Developers-Dev",
+      "aws iam create-group --group-name SCI-Frontend-Devs",
+      "aws iam create-group --group-name SCI-DevOps-Prod"
+    ],
+    "attachPolicies": [
+      "aws iam attach-group-policy --group-name SCI-Developers-Dev --policy-arn arn:aws:iam::aws:policy/PowerUserAccess",
+      "aws iam attach-group-policy --group-name SCI-Backend-Devs --policy-arn arn:aws:iam::ACCOUNT:policy/SCI-IoT-Sensors-Policy"
+    ],
+    "addUsers": [
+      "aws iam add-user-to-group --group-name SCI-Developers-Dev --user-name john.doe"
+    ]
+  },
+  "audit": {
+    "cloudtrail": {
+      "enabled": true,
+      "s3Bucket": "sci-audit-logs",
+      "cloudwatchAlerts": true
+    },
+    "reviewSchedule": {
+      "monthly": "Révision des membres de groupes",
+      "quarterly": "Audit des politiques attachées",
+      "biannual": "Révision complète de l'architecture IAM"
+    }
+  },
+  "checklist": [
+    "Créer tous les groupes IAM selon la structure définie",
+    "Créer les politiques personnalisées SCI",
+    "Attacher les politiques aux groupes appropriés",
+    "Migrer les utilisateurs existants vers les groupes",
+    "Supprimer les politiques directement attachées aux utilisateurs",
+    "Configurer CloudTrail pour l'audit",
+    "Mettre en place les alertes de monitoring",
+    "Documenter les procédures d'ajout/suppression d'utilisateurs",
+    "Former l'équipe sur les nouvelles procédures"
+  ]
+}

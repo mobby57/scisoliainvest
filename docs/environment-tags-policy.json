@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": ["eu-west-1", "eu-central-1"],
+          "ec2:ResourceTag/Environment": ["dev", "staging"]
+        }
+      }
+    }
+  ]
+}

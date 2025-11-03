@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification KYC - SCI Solia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/kyc.js"></script>
+</head>
+<body class="bg-gray-50" x-data="kycApp()">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../index.html" class="text-2xl font-bold text-blue-600">SCI Solia</a>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="index.html" class="text-gray-500 hover:text-blue-600 px-3 py-2">Tableau de bord</a>
+                        <a href="investments.html" class="text-gray-500 hover:text-blue-600 px-3 py-2">Investissements</a>
+                        <a href="transactions.html" class="text-gray-500 hover:text-blue-600 px-3 py-2">Transactions</a>
+                        <a href="kyc.html" class="text-blue-600 border-b-2 border-blue-600 px-3 py-2">KYC</a>
+                        <a href="../properties/index.html" class="text-gray-500 hover:text-blue-600 px-3 py-2">Projets</a>
+                        <a href="../admin/analytics.html" class="text-gray-500 hover:text-blue-600 px-3 py-2">Analytics</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="https://via.placeholder.com/32" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <span class="text-gray-700">Jean Dupont</span>
+                    </div>
+                    <a href="../auth/login.html" class="text-gray-500 hover:text-gray-700" title="Déconnexion">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-3xl font-bold mb-2">Vérification KYC</h1>
+            <p class="text-blue-100">Complétez votre vérification d'identité pour accéder à tous nos services</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Status Overview -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">Statut de Vérification</h2>
+                <div class="flex items-center space-x-2">
+                    <div class="w-3 h-3 rounded-full" :class="kycStatus === 'verified' ? 'bg-green-500' : kycStatus === 'pending' ? 'bg-yellow-500' : 'bg-red-500'"></div>
+                    <span class="font-medium" :class="kycStatus === 'verified' ? 'text-green-600' : kycStatus === 'pending' ? 'text-yellow-600' : 'text-red-600'" x-text="getStatusText()"></span>
+                </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                    <span>Progression</span>
+                    <span x-text="Math.round(progress) + '%'"></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" :style="'width: ' + progress + '%'"></div>
+                </div>
+            </div>
+
+            <!-- Steps -->
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="flex items-center space-x-3" :class="steps.personal ? 'text-green-600' : 'text-gray-400'">
+                    <i class="fas fa-user text-lg"></i>
+                    <span class="text-sm font-medium">Informations personnelles</span>
+                    <i class="fas fa-check-circle" x-show="steps.personal"></i>
+                </div>
+                <div class="flex items-center space-x-3" :class="steps.documents ? 'text-green-600' : 'text-gray-400'">
+                    <i class="fas fa-file-alt text-lg"></i>
+                    <span class="text-sm font-medium">Documents</span>
+                    <i class="fas fa-check-circle" x-show="steps.documents"></i>
+                </div>
+                <div class="flex items-center space-x-3" :class="steps.address ? 'text-green-600' : 'text-gray-400'">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="text-sm font-medium">Justificatif de domicile</span>
+                    <i class="fas fa-check-circle" x-show="steps.address"></i>
+                </div>
+                <div class="flex items-center space-x-3" :class="steps.verification ? 'text-green-600' : 'text-gray-400'">
+                    <i class="fas fa-shield-alt text-lg"></i>
+                    <span class="text-sm font-medium">Vérification</span>
+                    <i class="fas fa-check-circle" x-show="steps.verification"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- KYC Forms -->
+        <div class="space-y-8">
+            <!-- Personal Information -->
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <i class="fas fa-user text-blue-600 mr-2"></i>
+                            Informations Personnelles
+                        </h3>
+                        <button @click="toggleSection('personal')" class="text-blue-600 hover:text-blue-700">
+                            <i class="fas" :class="openSections.personal ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div x-show="openSections.personal" x-transition class="p-6">
+                    <form @submit.prevent="savePersonalInfo" class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Prénom *</label>
+                            <input type="text" x-model="personalInfo.firstName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nom *</label>
+                            <input type="text" x-model="personalInfo.lastName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date de naissance *</label>
+                            <input type="date" x-model="personalInfo.birthDate" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Lieu de naissance *</label>
+                            <input type="text" x-model="personalInfo.birthPlace" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nationalité *</label>
+                            <select x-model="personalInfo.nationality" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Sélectionner</option>
+                                <option value="FR">Française</option>
+                                <option value="BE">Belge</option>
+                                <option value="CH">Suisse</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone *</label>
+                            <input type="tel" x-model="personalInfo.phone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Adresse complète *</label>
+                            <textarea x-model="personalInfo.address" required rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-save mr-2"></i>Sauvegarder
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Identity Documents -->
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <i class="fas fa-id-card text-blue-600 mr-2"></i>
+                            Pièce d'Identité
+                        </h3>
+                        <button @click="toggleSection('identity')" class="text-blue-600 hover:text-blue-700">
+                            <i class="fas" :class="openSections.identity ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div x-show="openSections.identity" x-transition class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Type de document *</label>
+                            <select x-model="identityDoc.type" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Sélectionner</option>
+                                <option value="passport">Passeport</option>
+                                <option value="id_card">Carte d'identité</option>
+                                <option value="driving_license">Permis de conduire</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Numéro du document *</label>
+                            <input type="text" x-model="identityDoc.number" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <!-- File Upload Areas -->
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Recto du document *</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer" @click="$refs.frontFile.click()">
+                                <div x-show="!identityDoc.frontFile">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-600">Cliquez pour télécharger</p>
+                                    <p class="text-sm text-gray-400">PNG, JPG jusqu'à 10MB</p>
+                                </div>
+                                <div x-show="identityDoc.frontFile" class="text-green-600">
+                                    <i class="fas fa-check-circle text-2xl mb-2"></i>
+                                    <p x-text="identityDoc.frontFile?.name"></p>
+                                </div>
+                                <input type="file" x-ref="frontFile" @change="handleFileUpload($event, 'front')" accept="image/*" class="hidden">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Verso du document *</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer" @click="$refs.backFile.click()">
+                                <div x-show="!identityDoc.backFile">
+                                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                    <p class="text-gray-600">Cliquez pour télécharger</p>
+                                    <p class="text-sm text-gray-400">PNG, JPG jusqu'à 10MB</p>
+                                </div>
+                                <div x-show="identityDoc.backFile" class="text-green-600">
+                                    <i class="fas fa-check-circle text-2xl mb-2"></i>
+                                    <p x-text="identityDoc.backFile?.name"></p>
+                                </div>
+                                <input type="file" x-ref="backFile" @change="handleFileUpload($event, 'back')" accept="image/*" class="hidden">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button @click="uploadIdentityDocuments" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-upload mr-2"></i>Télécharger les documents
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Proof -->
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <i class="fas fa-home text-blue-600 mr-2"></i>
+                            Justificatif de Domicile
+                        </h3>
+                        <button @click="toggleSection('address')" class="text-blue-600 hover:text-blue-700">
+                            <i class="fas" :class="openSections.address ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div x-show="openSections.address" x-transition class="p-6">
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Type de justificatif *</label>
+                        <select x-model="addressProof.type" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Sélectionner</option>
+                            <option value="utility_bill">Facture d'électricité/gaz</option>
+                            <option value="bank_statement">Relevé bancaire</option>
+                            <option value="tax_notice">Avis d'imposition</option>
+                            <option value="rent_receipt">Quittance de loyer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Document (moins de 3 mois) *</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer" @click="$refs.addressFile.click()">
+                            <div x-show="!addressProof.file">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                <p class="text-gray-600">Cliquez pour télécharger</p>
+                                <p class="text-sm text-gray-400">PDF, PNG, JPG jusqu'à 10MB</p>
+                            </div>
+                            <div x-show="addressProof.file" class="text-green-600">
+                                <i class="fas fa-check-circle text-2xl mb-2"></i>
+                                <p x-text="addressProof.file?.name"></p>
+                            </div>
+                            <input type="file" x-ref="addressFile" @change="handleAddressFileUpload($event)" accept="image/*,.pdf" class="hidden">
+                        </div>
+                    </div>
+                    
+                    <button @click="uploadAddressProof" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        <i class="fas fa-upload mr-2"></i>Télécharger le justificatif
+                    </button>
+                </div>
+            </div>
+
+            <!-- Financial Information -->
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-gray-900">
+                            <i class="fas fa-chart-line text-blue-600 mr-2"></i>
+                            Informations Financières
+                        </h3>
+                        <button @click="toggleSection('financial')" class="text-blue-600 hover:text-blue-700">
+                            <i class="fas" :class="openSections.financial ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                        </button>
+                    </div>
+                </div>
+                <div x-show="openSections.financial" x-transition class="p-6">
+                    <form @submit.prevent="saveFinancialInfo" class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Profession *</label>
+                            <input type="text" x-model="financialInfo.profession" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Employeur</label>
+                            <input type="text" x-model="financialInfo.employer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Revenus annuels *</label>
+                            <select x-model="financialInfo.income" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Sélectionner</option>
+                                <option value="0-30000">Moins de 30 000€</option>
+                                <option value="30000-50000">30 000€ - 50 000€</option>
+                                <option value="50000-100000">50 000€ - 100 000€</option>
+                                <option value="100000+">Plus de 100 000€</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Source des fonds *</label>
+                            <select x-model="financialInfo.fundsSource" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Sélectionner</option>
+                                <option value="salary">Salaire</option>
+                                <option value="business">Activité professionnelle</option>
+                                <option value="inheritance">Héritage</option>
+                                <option value="savings">Épargne</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                                <i class="fas fa-save mr-2"></i>Sauvegarder
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Final Verification -->
+            <div class="bg-white rounded-xl shadow-lg">
+                <div class="p-6 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        <i class="fas fa-shield-alt text-blue-600 mr-2"></i>
+                        Finalisation
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <label class="flex items-start space-x-3">
+                            <input type="checkbox" x-model="agreements.terms" class="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-gray-700">
+                                J'accepte les <a href="#" class="text-blue-600 hover:underline">conditions générales d'utilisation</a> et la <a href="#" class="text-blue-600 hover:underline">politique de confidentialité</a>
+                            </span>
+                        </label>
+                        <label class="flex items-start space-x-3">
+                            <input type="checkbox" x-model="agreements.kyc" class="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-gray-700">
+                                Je certifie que toutes les informations fournies sont exactes et à jour
+                            </span>
+                        </label>
+                        <label class="flex items-start space-x-3">
+                            <input type="checkbox" x-model="agreements.marketing" class="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-gray-700">
+                                J'accepte de recevoir des communications marketing (optionnel)
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <div class="mt-8 flex space-x-4">
+                        <button @click="submitKYC" :disabled="!canSubmit()" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                            <i class="fas fa-check mr-2"></i>Soumettre ma demande KYC
+                        </button>
+                        <button @click="saveDraft" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+                            <i class="fas fa-save mr-2"></i>Sauvegarder le brouillon
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="bg-blue-50 rounded-xl p-6 mt-8">
+            <h3 class="text-lg font-semibold text-blue-900 mb-4">
+                <i class="fas fa-question-circle mr-2"></i>Besoin d'aide ?
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <h4 class="font-medium text-blue-800 mb-2">Documents acceptés :</h4>
+                    <ul class="text-blue-700 space-y-1">
+                        <li>• Passeport français ou européen</li>
+                        <li>• Carte nationale d'identité</li>
+                        <li>• Permis de conduire (recto/verso)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-medium text-blue-800 mb-2">Justificatifs de domicile :</h4>
+                    <ul class="text-blue-700 space-y-1">
+                        <li>• Facture d'électricité, gaz, eau</li>
+                        <li>• Relevé bancaire récent</li>
+                        <li>• Avis d'imposition</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4 p-4 bg-white rounded-lg">
+                <p class="text-blue-800">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    La vérification KYC est obligatoire pour investir. Le processus prend généralement 24-48h.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div x-show="showSuccessModal" x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Demande soumise !</h3>
+                <p class="text-gray-600 mb-6">Votre dossier KYC a été soumis avec succès. Vous recevrez une confirmation par email sous 24-48h.</p>
+                <button @click="showSuccessModal = false" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

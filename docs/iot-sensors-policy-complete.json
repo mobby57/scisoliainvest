@@ -1,0 +1,22 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iot:Publish",
+        "iot:Subscribe",
+        "iot:Connect"
+      ],
+      "Resource": "arn:aws:iot:*:*:topic/sci/properties/*/sensors/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "timestream:WriteRecords",
+        "timestream:DescribeTable"
+      ],
+      "Resource": "arn:aws:timestream:*:*:database/SCI-SensorData/*"
+    }
+  ]
+}

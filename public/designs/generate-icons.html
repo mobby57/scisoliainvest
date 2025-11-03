@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Icons</title>
+</head>
+<body>
+    <canvas id="canvas192" width="192" height="192" style="border: 1px solid #ccc;"></canvas>
+    <canvas id="canvas512" width="512" height="512" style="border: 1px solid #ccc;"></canvas>
+    
+    <script>
+        function createIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#1e40af';
+            ctx.roundRect(0, 0, size, size, size * 0.125);
+            ctx.fill();
+            
+            // House shape
+            ctx.fillStyle = 'white';
+            const houseSize = size * 0.5;
+            const houseX = size * 0.25;
+            const houseY = size * 0.375;
+            
+            // House base
+            ctx.fillRect(houseX, houseY + houseSize * 0.25, houseSize, houseSize * 0.75);
+            
+            // Roof
+            ctx.beginPath();
+            ctx.moveTo(houseX, houseY + houseSize * 0.25);
+            ctx.lineTo(size * 0.5, houseY);
+            ctx.lineTo(houseX + houseSize, houseY + houseSize * 0.25);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Door
+            ctx.fillStyle = '#1e40af';
+            const doorWidth = houseSize * 0.2;
+            const doorHeight = houseSize * 0.4;
+            ctx.fillRect(size * 0.5 - doorWidth * 0.5, houseY + houseSize - doorHeight, doorWidth, doorHeight);
+            
+            // Windows
+            ctx.fillStyle = '#fbbf24';
+            const windowSize = houseSize * 0.1;
+            ctx.fillRect(houseX + houseSize * 0.2, houseY + houseSize * 0.4, windowSize, windowSize);
+            ctx.fillRect(houseX + houseSize * 0.7, houseY + houseSize * 0.4, windowSize, windowSize);
+            
+            // Text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.08}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.fillText('SCI', size * 0.5, size * 0.9);
+        }
+        
+        // Add roundRect polyfill for older browsers
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+        
+        createIcon('canvas192', 192);
+        createIcon('canvas512', 512);
+        
+        // Add download links
+        setTimeout(() => {
+            const canvas192 = document.getElementById('canvas192');
+            const canvas512 = document.getElementById('canvas512');
+            
+            const link192 = document.createElement('a');
+            link192.download = 'icon-192.png';
+            link192.href = canvas192.toDataURL();
+            link192.textContent = 'Download 192x192 icon';
+            document.body.appendChild(link192);
+            document.body.appendChild(document.createElement('br'));
+            
+            const link512 = document.createElement('a');
+            link512.download = 'icon-512.png';
+            link512.href = canvas512.toDataURL();
+            link512.textContent = 'Download 512x512 icon';
+            document.body.appendChild(link512);
+        }, 100);
+    </script>
+</body>
+</html>

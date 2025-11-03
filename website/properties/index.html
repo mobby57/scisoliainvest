@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Propriétés - SCI Solia Invest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">SCI Solia</h1>
+                    <span class="ml-4 text-gray-500">/ Propriétés</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-plus mr-2"></i>Nouvelle propriété
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Filtres et recherche -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex flex-wrap gap-4 items-center">
+                <div class="flex-1 min-w-64">
+                    <input type="text" placeholder="Rechercher une propriété..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg">
+                    <option>Tous les types</option>
+                    <option>Appartement</option>
+                    <option>Maison</option>
+                    <option>Bureau</option>
+                </select>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg">
+                    <option>Toutes les villes</option>
+                    <option>Paris</option>
+                    <option>Lyon</option>
+                    <option>Marseille</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Liste des propriétés -->
+        <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Propriété 1 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">Loué</span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-bold">Appartement T3</h3>
+                        <p class="text-blue-100">75011 Paris</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <p class="text-2xl font-bold text-gray-900">1 850€</p>
+                            <p class="text-sm text-gray-500">Loyer mensuel</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-semibold text-green-600">+4.2%</p>
+                            <p class="text-sm text-gray-500">Rendement</p>
+                        </div>
+                    </div>
+                    
+                    <!-- IoT Status -->
+                    <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="text-center p-2 bg-green-50 rounded">
+                            <i class="fas fa-thermometer-half text-green-600"></i>
+                            <p class="text-xs text-green-600 mt-1">21°C</p>
+                        </div>
+                        <div class="text-center p-2 bg-blue-50 rounded">
+                            <i class="fas fa-bolt text-blue-600"></i>
+                            <p class="text-xs text-blue-600 mt-1">Normal</p>
+                        </div>
+                        <div class="text-center p-2 bg-purple-50 rounded">
+                            <i class="fas fa-user-check text-purple-600"></i>
+                            <p class="text-xs text-purple-600 mt-1">Occupé</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                            Voir détails
+                        </button>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Propriété 2 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">Vacant</span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-bold">Studio</h3>
+                        <p class="text-green-100">69002 Lyon</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <p class="text-2xl font-bold text-gray-900">950€</p>
+                            <p class="text-sm text-gray-500">Loyer estimé</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-semibold text-orange-600">En recherche</p>
+                            <p class="text-sm text-gray-500">Locataire</p>
+                        </div>
+                    </div>
+                    
+                    <!-- IoT Status -->
+                    <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="text-center p-2 bg-gray-50 rounded">
+                            <i class="fas fa-thermometer-half text-gray-400"></i>
+                            <p class="text-xs text-gray-400 mt-1">--°C</p>
+                        </div>
+                        <div class="text-center p-2 bg-gray-50 rounded">
+                            <i class="fas fa-bolt text-gray-400"></i>
+                            <p class="text-xs text-gray-400 mt-1">Arrêt</p>
+                        </div>
+                        <div class="text-center p-2 bg-gray-50 rounded">
+                            <i class="fas fa-user-times text-gray-400"></i>
+                            <p class="text-xs text-gray-400 mt-1">Libre</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                            Voir détails
+                        </button>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Propriété 3 -->
+            <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 relative">
+                    <div class="absolute top-4 right-4">
+                        <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">Maintenance</span>
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h3 class="text-xl font-bold">Maison T4</h3>
+                        <p class="text-purple-100">13001 Marseille</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <p class="text-2xl font-bold text-gray-900">2 200€</p>
+                            <p class="text-sm text-gray-500">Loyer mensuel</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-semibold text-red-600">Alerte</p>
+                            <p class="text-sm text-gray-500">Chauffage</p>
+                        </div>
+                    </div>
+                    
+                    <!-- IoT Status -->
+                    <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="text-center p-2 bg-red-50 rounded">
+                            <i class="fas fa-thermometer-half text-red-600"></i>
+                            <p class="text-xs text-red-600 mt-1">15°C</p>
+                        </div>
+                        <div class="text-center p-2 bg-red-50 rounded">
+                            <i class="fas fa-bolt text-red-600"></i>
+                            <p class="text-xs text-red-600 mt-1">Élevé</p>
+                        </div>
+                        <div class="text-center p-2 bg-green-50 rounded">
+                            <i class="fas fa-user-check text-green-600"></i>
+                            <p class="text-xs text-green-600 mt-1">Occupé</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center">
+                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                            Voir détails
+                        </button>
+                        <div class="flex space-x-2">
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-2 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques rapides -->
+        <div class="grid md:grid-cols-4 gap-6 mt-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 rounded-lg">
+                        <i class="fas fa-home text-blue-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-2xl font-bold text-gray-900">12</p>
+                        <p class="text-sm text-gray-500">Propriétés totales</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-100 rounded-lg">
+                        <i class="fas fa-check-circle text-green-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-2xl font-bold text-gray-900">9</p>
+                        <p class="text-sm text-gray-500">Louées</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 bg-orange-100 rounded-lg">
+                        <i class="fas fa-exclamation-triangle text-orange-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-2xl font-bold text-gray-900">2</p>
+                        <p class="text-sm text-gray-500">Alertes IoT</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-100 rounded-lg">
+                        <i class="fas fa-euro-sign text-purple-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-2xl font-bold text-gray-900">18.5k€</p>
+                        <p class="text-sm text-gray-500">Revenus mensuels</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
