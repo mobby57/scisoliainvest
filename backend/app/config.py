@@ -3,6 +3,7 @@ Configuration management for FastAPI backend
 Loads settings from environment variables with fallback defaults
 """
 import os
+import secrets
 from typing import Optional
 from dotenv import load_dotenv
 
@@ -10,7 +11,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # JWT Configuration
-SECRET_KEY: str = os.getenv("SECRET_KEY", "changeme-123")
+_default_secret = os.getenv("SECRET_KEY")
+if not _default_secret:
+    import warnings
+    warnings.warn(
+        "SECRET_KEY not set in environment! Using insecure default. "
+        "Set SECRET_KEY in .env file for production.",
+        UserWarning
+    )
+    _default_secret = "changeme-123-INSECURE-DEFAULT"
+
+SECRET_KEY: str = _default_secret
 ALGORITHM: str = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
