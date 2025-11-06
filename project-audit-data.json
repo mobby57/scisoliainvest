@@ -1640,6 +1640,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Accounting.ts",
+        "name": "Accounting.ts",
+        "size": 8031,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/AuditLog.ts",
         "name": "AuditLog.ts",
         "size": 6111,
@@ -1661,9 +1668,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Legal.ts",
+        "name": "Legal.ts",
+        "size": 6913,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/Notification.ts",
         "name": "Notification.ts",
         "size": 4353,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Tax.ts",
+        "name": "Tax.ts",
+        "size": 6088,
         "extension": ".ts"
       },
       {
@@ -1677,6 +1698,13 @@
         "type": "directory",
         "path": "packages/api/src/routes",
         "name": "routes"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/accounting.routes.ts",
+        "name": "accounting.routes.ts",
+        "size": 8540,
+        "extension": ".ts"
       },
       {
         "type": "file",
@@ -1710,7 +1738,7 @@
         "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 805,
+        "size": 1081,
         "extension": ".ts"
       },
       {
@@ -1718,6 +1746,20 @@
         "path": "packages/api/src/routes/iot.routes.ts",
         "name": "iot.routes.ts",
         "size": 7914,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/legal.routes.ts",
+        "name": "legal.routes.ts",
+        "size": 6918,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/tax.routes.ts",
+        "name": "tax.routes.ts",
+        "size": 5980,
         "extension": ".ts"
       },
       {
@@ -1738,6 +1780,13 @@
         "type": "directory",
         "path": "packages/api/src/services",
         "name": "services"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/accounting.service.ts",
+        "name": "accounting.service.ts",
+        "size": 5091,
+        "extension": ".ts"
       },
       {
         "type": "file",
@@ -1769,9 +1818,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/services/legal.service.ts",
+        "name": "legal.service.ts",
+        "size": 3534,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/services/notification.service.ts",
         "name": "notification.service.ts",
         "size": 4334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/tax.service.ts",
+        "name": "tax.service.ts",
+        "size": 3279,
         "extension": ".ts"
       },
       {
@@ -1895,7 +1958,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 201662,
+        "size": 205037,
         "extension": ".json"
       },
       {
@@ -4321,6 +4384,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Accounting.ts",
+        "name": "Accounting.ts",
+        "size": 8031,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/AuditLog.ts",
         "name": "AuditLog.ts",
         "size": 6111,
@@ -4342,6 +4412,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Legal.ts",
+        "name": "Legal.ts",
+        "size": 6913,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/Notification.ts",
         "name": "Notification.ts",
         "size": 4353,
@@ -4349,9 +4426,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Tax.ts",
+        "name": "Tax.ts",
+        "size": 6088,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/User.ts",
         "name": "User.ts",
         "size": 381,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/accounting.routes.ts",
+        "name": "accounting.routes.ts",
+        "size": 8540,
         "extension": ".ts"
       },
       {
@@ -4386,7 +4477,7 @@
         "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 805,
+        "size": 1081,
         "extension": ".ts"
       },
       {
@@ -4394,6 +4485,20 @@
         "path": "packages/api/src/routes/iot.routes.ts",
         "name": "iot.routes.ts",
         "size": 7914,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/legal.routes.ts",
+        "name": "legal.routes.ts",
+        "size": 6918,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/tax.routes.ts",
+        "name": "tax.routes.ts",
+        "size": 5980,
         "extension": ".ts"
       },
       {
@@ -4408,6 +4513,13 @@
         "path": "packages/api/src/server.ts",
         "name": "server.ts",
         "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/accounting.service.ts",
+        "name": "accounting.service.ts",
+        "size": 5091,
         "extension": ".ts"
       },
       {
@@ -4440,9 +4552,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/services/legal.service.ts",
+        "name": "legal.service.ts",
+        "size": 3534,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/services/notification.service.ts",
         "name": "notification.service.ts",
         "size": 4334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/tax.service.ts",
+        "name": "tax.service.ts",
+        "size": 3279,
         "extension": ".ts"
       },
       {
@@ -4526,7 +4652,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 201662,
+        "size": 205037,
         "extension": ".json"
       },
       {
@@ -6887,7 +7013,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 201662,
+        "size": 205037,
         "extension": ".json"
       },
       {
@@ -7407,6 +7533,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Accounting.ts",
+        "name": "Accounting.ts",
+        "size": 8031,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/AIAnalytics.ts",
         "name": "AIAnalytics.ts",
         "size": 6286,
@@ -7435,6 +7568,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Legal.ts",
+        "name": "Legal.ts",
+        "size": 6913,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/Notification.ts",
         "name": "Notification.ts",
         "size": 4353,
@@ -7442,9 +7582,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/Tax.ts",
+        "name": "Tax.ts",
+        "size": 6088,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/User.ts",
         "name": "User.ts",
         "size": 381,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/accounting.routes.ts",
+        "name": "accounting.routes.ts",
+        "size": 8540,
         "extension": ".ts"
       },
       {
@@ -7479,7 +7633,7 @@
         "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 805,
+        "size": 1081,
         "extension": ".ts"
       },
       {
@@ -7487,6 +7641,20 @@
         "path": "packages/api/src/routes/iot.routes.ts",
         "name": "iot.routes.ts",
         "size": 7914,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/legal.routes.ts",
+        "name": "legal.routes.ts",
+        "size": 6918,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/tax.routes.ts",
+        "name": "tax.routes.ts",
+        "size": 5980,
         "extension": ".ts"
       },
       {
@@ -7501,6 +7669,13 @@
         "path": "packages/api/src/server.ts",
         "name": "server.ts",
         "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/accounting.service.ts",
+        "name": "accounting.service.ts",
+        "size": 5091,
         "extension": ".ts"
       },
       {
@@ -7533,9 +7708,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/services/legal.service.ts",
+        "name": "legal.service.ts",
+        "size": 3534,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/services/notification.service.ts",
         "name": "notification.service.ts",
         "size": 4334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/tax.service.ts",
+        "name": "tax.service.ts",
+        "size": 3279,
         "extension": ".ts"
       },
       {
@@ -8270,14 +8459,14 @@
     ]
   },
   "statistics": {
-    "totalFiles": 362,
+    "totalFiles": 371,
     "totalDirectories": 61,
     "categoryCounts": {
       "documentation": 62,
       "other": 43,
       "configuration": 76,
       "infrastructure": 8,
-      "source": 116,
+      "source": 125,
       "scripts": 44,
       "tests": 3,
       "database": 2,

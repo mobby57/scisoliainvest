@@ -4,7 +4,7 @@
 
 📊 STATISTIQUES GÉNÉRALES
 ─────────────────────────────────────────────────────────────
-  Fichiers totaux:           362
+  Fichiers totaux:           371
   Répertoires:               61
   Fichiers requis manquants: 0
   Fichiers optionnels manqu: 8
@@ -15,7 +15,7 @@
   other               : 43
   configuration       : 76
   infrastructure      : 8
-  source              : 116
+  source              : 125
   scripts             : 44
   tests               : 3
   database            : 2
@@ -126,7 +126,7 @@
     • packages/api/Dockerfile.complete
     • packages/api/Dockerfile.dev
 
-  SOURCE (116 fichiers)
+  SOURCE (125 fichiers)
     • backend/scripts/health-check.js
     • backend/server.js
     • components/Auth/Login.tsx
@@ -147,7 +147,7 @@
     • cypress/e2e/2-advanced-examples/files.cy.js
     • cypress/e2e/2-advanced-examples/location.cy.js
     • cypress/e2e/2-advanced-examples/misc.cy.js
-    ... et 96 autres fichiers
+    ... et 105 autres fichiers
 
   SCRIPTS (44 fichiers)
     • generate-certs.bat
@@ -209,5 +209,5 @@
   Statut: ✅ EXCELLENT - Prêt pour production
 
 ═══════════════════════════════════════════════════════════════
-  Généré le: 06/11/2025 15:23:58
+  Généré le: 06/11/2025 15:40:56
 ═══════════════════════════════════════════════════════════════
