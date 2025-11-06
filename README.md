@@ -2,6 +2,17 @@
 
 Welcome to the SCI Solia Invest Platform repository! This project aims to provide a comprehensive SaaS solution for managing investments and properties.
 
+## 📊 Project Status
+
+**For a comprehensive overview of the project status, please see [PROJECT_STATUS.md](PROJECT_STATUS.md)**
+
+This document includes:
+- Current architecture and technology stack
+- Completed features and work in progress
+- Detailed TODO tracking across all project areas
+- Next steps and priorities
+- Metrics and health indicators
+
 ## Getting Started
 
 To get started with the project, follow these steps:
