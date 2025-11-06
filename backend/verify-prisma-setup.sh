@@ -7,6 +7,10 @@ echo "🔍 SCI Solia Invest - Prisma Setup Verification"
 echo "================================================"
 echo ""
 
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKEND_DIR="$SCRIPT_DIR"
+
 # Check if Docker is running
 echo "1. Checking Docker..."
 if docker ps > /dev/null 2>&1; then
@@ -40,12 +44,11 @@ fi
 # Check if Prisma Client is installed
 echo ""
 echo "4. Checking Prisma installation..."
-cd backend
-if [ -d "node_modules/@prisma/client" ]; then
+if [ -d "$BACKEND_DIR/node_modules/@prisma/client" ]; then
     echo "   ✅ Prisma Client is installed"
 else
     echo "   ❌ Prisma Client not found"
-    echo "   Run: npm install"
+    echo "   Run: cd backend && npm install"
     exit 1
 fi
 
@@ -56,7 +59,7 @@ TABLES=$(docker exec solia-postgres psql -U postgres -d sci_solia_invest -t -c "
 if [ "$TABLES" -gt 5 ]; then
     echo "   ✅ Database tables exist"
 else
-    echo "   ⚠️  No tables found, run: npm run prisma:migrate"
+    echo "   ⚠️  No tables found, run: cd backend && npm run prisma:migrate"
 fi
 
 # Check if data has been seeded
@@ -66,12 +69,13 @@ USERS=$(docker exec solia-postgres psql -U postgres -d sci_solia_invest -t -c "S
 if [ "$USERS" -gt 0 ]; then
     echo "   ✅ Database has been seeded ($USERS users found)"
 else
-    echo "   ⚠️  No data found, run: npm run prisma:seed"
+    echo "   ⚠️  No data found, run: cd backend && npm run prisma:seed"
 fi
 
 # Test Prisma connection
 echo ""
 echo "7. Testing Prisma Client connection..."
+cd "$BACKEND_DIR"
 if node -e "
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
@@ -93,6 +97,6 @@ echo ""
 echo "🎉 All checks passed! Your Prisma setup is working correctly."
 echo ""
 echo "Next steps:"
-echo "  • Start the backend server: npm start"
-echo "  • Open Prisma Studio: npm run prisma:studio"
-echo "  • View documentation: cat PRISMA_SETUP.md"
+echo "  • Start the backend server: cd backend && npm start"
+echo "  • Open Prisma Studio: cd backend && npm run prisma:studio"
+echo "  • View documentation: cat backend/PRISMA_SETUP.md"
