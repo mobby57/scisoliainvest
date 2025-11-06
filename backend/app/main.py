@@ -3,17 +3,18 @@ from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import health, annonce
 from app.auth import authenticate_user, create_access_token, get_current_user
+from app.config import CORS_ORIGINS, API_TITLE, API_DESCRIPTION, API_VERSION
 
 app = FastAPI(
-    title="Hub Immobilier Digital API",
-    description="API SaaS pour les opérations immobilières digitales.",
-    version="0.1.0",
+    title=API_TITLE,
+    description=API_DESCRIPTION,
+    version=API_VERSION,
 )
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify exact origins
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

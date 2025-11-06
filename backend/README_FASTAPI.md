@@ -8,19 +8,46 @@ cd backend
 pip install -r requirements.txt
 ```
 
+2. Configure environment variables:
+```bash
+cd backend
+cp .env.example .env
+# Edit .env and update the values, especially SECRET_KEY and DATABASE_URL
+```
+
 ## Configuration
+
+The backend uses environment variables for configuration. Create a `.env` file in the `backend/` directory based on `.env.example`:
+
+### Environment Variables
+
+- `SECRET_KEY` - JWT secret key (⚠️ MUST be changed in production!)
+- `JWT_ALGORITHM` - JWT signing algorithm (default: HS256)
+- `ACCESS_TOKEN_EXPIRE_MINUTES` - Token expiration time (default: 30)
+- `DATABASE_URL` - PostgreSQL connection string
+- `CORS_ORIGINS` - Comma-separated list of allowed origins
+- `API_TITLE` - API title for documentation
+- `API_DESCRIPTION` - API description
+- `API_VERSION` - API version
 
 ### Database Setup
 
-The application uses PostgreSQL. Update the database URL in `app/db.py`:
+The application uses PostgreSQL. Configure the database URL in `.env`:
 
-```python
-SQLALCHEMY_DATABASE_URL = "postgresql://user:password@localhost/hubimmo"
+```bash
+DATABASE_URL=postgresql://username:password@localhost:5432/database_name
 ```
 
 ### Create Database Tables
 
-Run Python to create tables:
+Run the initialization script:
+
+```bash
+cd backend
+python init_db.py
+```
+
+Or manually in Python:
 
 ```python
 python
@@ -71,10 +98,20 @@ Once the server is running, visit:
 ### Annonces (Real Estate Listings)
 
 - `POST /annonces` - Create a new annonce
-  - Parameters: `titre`, `description`, `prix`, `localisation`
+  - Request body (JSON):
+    ```json
+    {
+      "titre": "Appartement 3 pièces",
+      "description": "Bel appartement lumineux",
+      "prix": 250000,
+      "localisation": "Paris 15ème"
+    }
+    ```
+  - Validation: All fields are required, prix must be > 0
   - Note: Requires PostgreSQL database to be running
 
 - `GET /annonces` - Get all annonces
+  - Returns: List of annonce objects
   - Note: Requires PostgreSQL database to be running
 
 ## Testing
