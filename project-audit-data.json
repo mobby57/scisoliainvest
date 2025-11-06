@@ -81,6 +81,13 @@
       },
       {
         "type": "file",
+        "path": "GUIDE_OUTILS_AUDIT.md",
+        "name": "GUIDE_OUTILS_AUDIT.md",
+        "size": 10144,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "MCP_SETUP_GUIDE.md",
         "name": "MCP_SETUP_GUIDE.md",
         "size": 3431,
@@ -111,7 +118,14 @@
         "type": "file",
         "path": "PROJECT_AUDIT_REPORT.md",
         "name": "PROJECT_AUDIT_REPORT.md",
-        "size": 9782,
+        "size": 8217,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJET_PRET_RAPPORT_FINAL.md",
+        "name": "PROJET_PRET_RAPPORT_FINAL.md",
+        "size": 8717,
         "extension": ".md"
       },
       {
@@ -133,6 +147,13 @@
         "path": "README.md",
         "name": "README.md",
         "size": 1046,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "RESUME_AUDIT.md",
+        "name": "RESUME_AUDIT.md",
+        "size": 3855,
         "extension": ".md"
       },
       {
@@ -723,6 +744,13 @@
         "path": "docker-compose.prod.yml",
         "name": "docker-compose.prod.yml",
         "size": 1448,
+        "extension": ".yml"
+      },
+      {
+        "type": "file",
+        "path": "docker-compose.yml",
+        "name": "docker-compose.yml",
+        "size": 4238,
         "extension": ".yml"
       },
       {
@@ -1479,7 +1507,7 @@
         "type": "file",
         "path": "packages/api/package.json",
         "name": "package.json",
-        "size": 1249,
+        "size": 1335,
         "extension": ".json"
       },
       {
@@ -1523,6 +1551,13 @@
         "path": "packages/api/src/config/logger.ts",
         "name": "logger.ts",
         "size": 728,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/redis.ts",
+        "name": "redis.ts",
+        "size": 1784,
         "extension": ".ts"
       },
       {
@@ -1598,6 +1633,27 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/AuditLog.ts",
+        "name": "AuditLog.ts",
+        "size": 6111,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Document.ts",
+        "name": "Document.ts",
+        "size": 3487,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Notification.ts",
+        "name": "Notification.ts",
+        "size": 4353,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/User.ts",
         "name": "User.ts",
         "size": 381,
@@ -1617,9 +1673,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/routes/documents.routes.ts",
+        "name": "documents.routes.ts",
+        "size": 7449,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/financial-flow.routes.ts",
+        "name": "financial-flow.routes.ts",
+        "size": 10356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 244,
+        "size": 617,
         "extension": ".ts"
       },
       {
@@ -1640,6 +1710,27 @@
         "type": "directory",
         "path": "packages/api/src/services",
         "name": "services"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/audit.service.ts",
+        "name": "audit.service.ts",
+        "size": 3356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/document.service.ts",
+        "name": "document.service.ts",
+        "size": 3847,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/notification.service.ts",
+        "name": "notification.service.ts",
+        "size": 4334,
+        "extension": ".ts"
       },
       {
         "type": "directory",
@@ -1683,6 +1774,18 @@
         "type": "directory",
         "path": "packages/api/tests",
         "name": "tests"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/tests/__mocks__",
+        "name": "__mocks__"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/__mocks__/jwt.mock.ts",
+        "name": "jwt.mock.ts",
+        "size": 3885,
+        "extension": ".ts"
       },
       {
         "type": "file",
@@ -1750,7 +1853,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 174160,
+        "size": 199910,
         "extension": ".json"
       },
       {
@@ -2762,6 +2865,13 @@
       },
       {
         "type": "file",
+        "path": "GUIDE_OUTILS_AUDIT.md",
+        "name": "GUIDE_OUTILS_AUDIT.md",
+        "size": 10144,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "MCP_SETUP_GUIDE.md",
         "name": "MCP_SETUP_GUIDE.md",
         "size": 3431,
@@ -2792,7 +2902,14 @@
         "type": "file",
         "path": "PROJECT_AUDIT_REPORT.md",
         "name": "PROJECT_AUDIT_REPORT.md",
-        "size": 9782,
+        "size": 8217,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJET_PRET_RAPPORT_FINAL.md",
+        "name": "PROJET_PRET_RAPPORT_FINAL.md",
+        "size": 8717,
         "extension": ".md"
       },
       {
@@ -2814,6 +2931,13 @@
         "path": "README.md",
         "name": "README.md",
         "size": 1046,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "RESUME_AUDIT.md",
+        "name": "RESUME_AUDIT.md",
+        "size": 3855,
         "extension": ".md"
       },
       {
@@ -3339,6 +3463,13 @@
         "path": "docker-compose.prod.yml",
         "name": "docker-compose.prod.yml",
         "size": 1448,
+        "extension": ".yml"
+      },
+      {
+        "type": "file",
+        "path": "docker-compose.yml",
+        "name": "docker-compose.yml",
+        "size": 4238,
         "extension": ".yml"
       },
       {
@@ -4045,7 +4176,7 @@
         "type": "file",
         "path": "packages/api/package.json",
         "name": "package.json",
-        "size": 1249,
+        "size": 1335,
         "extension": ".json"
       },
       {
@@ -4074,6 +4205,13 @@
         "path": "packages/api/src/config/logger.ts",
         "name": "logger.ts",
         "size": 728,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/redis.ts",
+        "name": "redis.ts",
+        "size": 1784,
         "extension": ".ts"
       },
       {
@@ -4134,6 +4272,27 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/AuditLog.ts",
+        "name": "AuditLog.ts",
+        "size": 6111,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Document.ts",
+        "name": "Document.ts",
+        "size": 3487,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Notification.ts",
+        "name": "Notification.ts",
+        "size": 4353,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/User.ts",
         "name": "User.ts",
         "size": 381,
@@ -4148,9 +4307,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/routes/documents.routes.ts",
+        "name": "documents.routes.ts",
+        "size": 7449,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/financial-flow.routes.ts",
+        "name": "financial-flow.routes.ts",
+        "size": 10356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 244,
+        "size": 617,
         "extension": ".ts"
       },
       {
@@ -4165,6 +4338,27 @@
         "path": "packages/api/src/server.ts",
         "name": "server.ts",
         "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/audit.service.ts",
+        "name": "audit.service.ts",
+        "size": 3356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/document.service.ts",
+        "name": "document.service.ts",
+        "size": 3847,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/notification.service.ts",
+        "name": "notification.service.ts",
+        "size": 4334,
         "extension": ".ts"
       },
       {
@@ -4193,6 +4387,13 @@
         "path": "packages/api/src/utils/validators.ts",
         "name": "validators.ts",
         "size": 463,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/__mocks__/jwt.mock.ts",
+        "name": "jwt.mock.ts",
+        "size": 3885,
         "extension": ".ts"
       },
       {
@@ -4241,7 +4442,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 174160,
+        "size": 199910,
         "extension": ".json"
       },
       {
@@ -5280,6 +5481,11 @@
       },
       {
         "type": "directory",
+        "path": "packages/api/tests/__mocks__",
+        "name": "__mocks__"
+      },
+      {
+        "type": "directory",
         "path": "packages/api/tests/utils",
         "name": "utils"
       },
@@ -5399,14 +5605,6 @@
     "packages/api": {
       "required": [],
       "optional": [
-        "src/config/redis.ts",
-        "src/models/Document.ts",
-        "src/models/Notification.ts",
-        "src/models/AuditLog.ts",
-        "src/routes/documents.routes.ts",
-        "src/routes/distribution.routes.ts",
-        "src/routes/financial-flow.routes.ts",
-        "tests/__mocks__/jwt.mock.ts",
         "dist/",
         "node_modules/"
       ]
@@ -5426,9 +5624,7 @@
       ]
     },
     "root": {
-      "required": [
-        "docker-compose.yml"
-      ],
+      "required": [],
       "optional": [
         "node_modules/",
         ".github/"
@@ -5586,6 +5782,13 @@
       },
       {
         "type": "file",
+        "path": "GUIDE_OUTILS_AUDIT.md",
+        "name": "GUIDE_OUTILS_AUDIT.md",
+        "size": 10144,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "k8s/README.md",
         "name": "README.md",
         "size": 1846,
@@ -5672,7 +5875,14 @@
         "type": "file",
         "path": "PROJECT_AUDIT_REPORT.md",
         "name": "PROJECT_AUDIT_REPORT.md",
-        "size": 9782,
+        "size": 8217,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJET_PRET_RAPPORT_FINAL.md",
+        "name": "PROJET_PRET_RAPPORT_FINAL.md",
+        "size": 8717,
         "extension": ".md"
       },
       {
@@ -5694,6 +5904,13 @@
         "path": "README.md",
         "name": "README.md",
         "size": 1046,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "RESUME_AUDIT.md",
+        "name": "RESUME_AUDIT.md",
+        "size": 3855,
         "extension": ".md"
       },
       {
@@ -6269,6 +6486,13 @@
       },
       {
         "type": "file",
+        "path": "docker-compose.yml",
+        "name": "docker-compose.yml",
+        "size": 4238,
+        "extension": ".yml"
+      },
+      {
+        "type": "file",
         "path": "docs/AWS_IAM_BEST_PRACTICES.json",
         "name": "AWS_IAM_BEST_PRACTICES.json",
         "size": 5985,
@@ -6558,7 +6782,7 @@
         "type": "file",
         "path": "packages/api/package.json",
         "name": "package.json",
-        "size": 1249,
+        "size": 1335,
         "extension": ".json"
       },
       {
@@ -6579,7 +6803,7 @@
         "type": "file",
         "path": "project-audit-data.json",
         "name": "project-audit-data.json",
-        "size": 174160,
+        "size": 199910,
         "extension": ".json"
       },
       {
@@ -7036,6 +7260,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/config/redis.ts",
+        "name": "redis.ts",
+        "size": 1784,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/index.ts",
         "name": "index.ts",
         "size": 287,
@@ -7092,6 +7323,27 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/models/AuditLog.ts",
+        "name": "AuditLog.ts",
+        "size": 6111,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Document.ts",
+        "name": "Document.ts",
+        "size": 3487,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/Notification.ts",
+        "name": "Notification.ts",
+        "size": 4353,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/models/User.ts",
         "name": "User.ts",
         "size": 381,
@@ -7106,9 +7358,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/src/routes/documents.routes.ts",
+        "name": "documents.routes.ts",
+        "size": 7449,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/financial-flow.routes.ts",
+        "name": "financial-flow.routes.ts",
+        "size": 10356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
         "path": "packages/api/src/routes/index.ts",
         "name": "index.ts",
-        "size": 244,
+        "size": 617,
         "extension": ".ts"
       },
       {
@@ -7123,6 +7389,27 @@
         "path": "packages/api/src/server.ts",
         "name": "server.ts",
         "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/audit.service.ts",
+        "name": "audit.service.ts",
+        "size": 3356,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/document.service.ts",
+        "name": "document.service.ts",
+        "size": 3847,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/services/notification.service.ts",
+        "name": "notification.service.ts",
+        "size": 4334,
         "extension": ".ts"
       },
       {
@@ -7151,6 +7438,13 @@
         "path": "packages/api/src/utils/validators.ts",
         "name": "validators.ts",
         "size": 463,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/__mocks__/jwt.mock.ts",
+        "name": "jwt.mock.ts",
+        "size": 3885,
         "extension": ".ts"
       },
       {
@@ -7850,20 +8144,20 @@
     ]
   },
   "statistics": {
-    "totalFiles": 342,
-    "totalDirectories": 60,
+    "totalFiles": 356,
+    "totalDirectories": 61,
     "categoryCounts": {
-      "documentation": 59,
+      "documentation": 62,
       "other": 43,
-      "configuration": 75,
+      "configuration": 76,
       "infrastructure": 8,
-      "source": 100,
+      "source": 110,
       "scripts": 44,
       "tests": 3,
       "database": 2,
       "assets": 8
     },
-    "missingRequired": 1,
-    "missingOptional": 16
+    "missingRequired": 0,
+    "missingOptional": 8
   }
 }
