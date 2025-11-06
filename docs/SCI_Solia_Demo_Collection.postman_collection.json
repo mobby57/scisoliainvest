@@ -1,0 +1,396 @@
+{
+  "info": {
+    "name": "SCI Solia Invest - Demo Collection",
+    "_postman_id": "demo-collection-sci-solia-2024",
+    "description": "Collection de démonstration pour SCI Solia Invest - Auth, CRUD Projets, Prédiction IA, IoT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "project_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "device_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔑 Authentication",
+      "item": [
+        {
+          "name": "POST /auth/token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Authentication successful', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.token).to.exist;",
+                  "    pm.collectionVariables.set('auth_token', response.token);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@solia.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/token",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "Authentifie un utilisateur et retourne un token JWT"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📁 CRUD Projets",
+      "item": [
+        {
+          "name": "POST /projects",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Project created successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.id).to.exist;",
+                  "    pm.expect(response.name).to.exist;",
+                  "    pm.collectionVariables.set('project_id', response.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Projet Immobilier Paris\",\n  \"description\": \"Rénovation d'un immeuble dans le 15ème\",\n  \"budget\": 500000,\n  \"location\": \"Paris, France\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects",
+              "host": ["{{base_url}}"],
+              "path": ["projects"]
+            },
+            "description": "Crée un nouveau projet immobilier"
+          }
+        },
+        {
+          "name": "GET /projects",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Projects retrieved successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/projects",
+              "host": ["{{base_url}}"],
+              "path": ["projects"]
+            },
+            "description": "Récupère la liste de tous les projets"
+          }
+        },
+        {
+          "name": "GET /projects/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Project retrieved successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.id).to.exist;",
+                  "    pm.expect(response.name).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/projects/{{project_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "{{project_id}}"]
+            },
+            "description": "Récupère les détails d'un projet spécifique par son ID"
+          }
+        },
+        {
+          "name": "PUT /projects/:id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Project updated successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.id).to.exist;",
+                  "    pm.expect(response.name).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Projet Immobilier Paris - Mise à jour\",\n  \"description\": \"Rénovation complète d'un immeuble dans le 15ème\",\n  \"budget\": 550000,\n  \"status\": \"in_progress\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects/{{project_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "{{project_id}}"]
+            },
+            "description": "Met à jour un projet existant"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🤖 Prédiction IA",
+      "item": [
+        {
+          "name": "POST /projects/:id/predict",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Prediction generated successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.prediction).to.exist;",
+                  "    pm.expect(response.confidence).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"rental_value\",\n  \"parameters\": {\n    \"surface\": 85,\n    \"location\": \"Paris 15ème\",\n    \"propertyType\": \"apartment\",\n    \"year\": 2024\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/projects/{{project_id}}/predict",
+              "host": ["{{base_url}}"],
+              "path": ["projects", "{{project_id}}", "predict"]
+            },
+            "description": "Lance une prédiction IA pour un projet (valeur locative, maintenance, etc.)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "📡 IoT - Capteurs et Lectures",
+      "item": [
+        {
+          "name": "POST /iot/devices/:id/readings",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('IoT reading posted successfully', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.success).to.be.true;",
+                  "    pm.expect(response.reading).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sensorType\": \"temperature\",\n  \"value\": 22.5,\n  \"unit\": \"celsius\",\n  \"timestamp\": \"{{$isoTimestamp}}\",\n  \"metadata\": {\n    \"room\": \"living_room\",\n    \"floor\": 2\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/iot/devices/{{device_id}}/readings",
+              "host": ["{{base_url}}"],
+              "path": ["iot", "devices", "{{device_id}}", "readings"]
+            },
+            "description": "Enregistre une nouvelle lecture de capteur IoT pour un device spécifique"
+          }
+        },
+        {
+          "name": "GET /iot/devices/:id/readings",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('IoT readings retrieved successfully', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "    const response = pm.response.json();",
+                  "    pm.expect(response.readings).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/iot/devices/{{device_id}}/readings?limit=50",
+              "host": ["{{base_url}}"],
+              "path": ["iot", "devices", "{{device_id}}", "readings"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Récupère les lectures IoT d'un device spécifique"
+          }
+        }
+      ]
+    }
+  ]
+}
