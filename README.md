@@ -4,11 +4,15 @@ Welcome to the SCI Solia Invest Platform repository! This project aims to provid
 
 ## 📊 Project Status
 
-**For a comprehensive overview of the project status, please see [PROJECT_STATUS.md](PROJECT_STATUS.md)**
+**Choose your preferred view:**
 
-This document includes:
+- 📋 **[TABLEAU_DE_BORD.md](TABLEAU_DE_BORD.md)** - Visual dashboard with metrics and progress bars (Recommended for quick overview)
+- 📄 **[ETAT_PROJET_RESUME.md](ETAT_PROJET_RESUME.md)** - Executive summary in French (Quick 1-minute read)
+- 📚 **[PROJECT_STATUS.md](PROJECT_STATUS.md)** - Comprehensive detailed status (Complete reference)
+
+These documents include:
 - Current architecture and technology stack
-- Completed features and work in progress
+- Completed features and work in progress  
 - Detailed TODO tracking across all project areas
 - Next steps and priorities
 - Metrics and health indicators
