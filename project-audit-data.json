@@ -88,6 +88,13 @@
       },
       {
         "type": "file",
+        "path": "MISSING_FILES_CREATED.md",
+        "name": "MISSING_FILES_CREATED.md",
+        "size": 2352,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "Makefile",
         "name": "Makefile",
         "size": 1213,
@@ -98,6 +105,13 @@
         "path": "POSTMAN_WORKFLOW_GUIDE.md",
         "name": "POSTMAN_WORKFLOW_GUIDE.md",
         "size": 4515,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJECT_AUDIT_REPORT.md",
+        "name": "PROJECT_AUDIT_REPORT.md",
+        "size": 9782,
         "extension": ".md"
       },
       {
@@ -338,6 +352,13 @@
       },
       {
         "type": "file",
+        "path": "backend/.env.example",
+        "name": ".env.example",
+        "size": 288,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "backend/.env.local",
         "name": ".env.local",
         "size": 254,
@@ -356,6 +377,13 @@
         "name": "Gemfile",
         "size": 386,
         "extension": ""
+      },
+      {
+        "type": "file",
+        "path": "backend/README.md",
+        "name": "README.md",
+        "size": 429,
+        "extension": ".md"
       },
       {
         "type": "directory",
@@ -477,6 +505,13 @@
         "name": "TopNavigation.tsx",
         "size": 7106,
         "extension": ".tsx"
+      },
+      {
+        "type": "file",
+        "path": "create-missing-files.cjs",
+        "name": "create-missing-files.cjs",
+        "size": 22711,
+        "extension": ".cjs"
       },
       {
         "type": "directory",
@@ -882,6 +917,13 @@
       },
       {
         "type": "file",
+        "path": "frontend/.env.example",
+        "name": ".env.example",
+        "size": 105,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "frontend/.env.local",
         "name": ".env.local",
         "size": 231,
@@ -896,10 +938,24 @@
       },
       {
         "type": "file",
+        "path": "frontend/README.md",
+        "name": "README.md",
+        "size": 566,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "frontend/next-env.d.ts",
         "name": "next-env.d.ts",
         "size": 200,
         "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "frontend/next.config.js",
+        "name": "next.config.js",
+        "size": 238,
+        "extension": ".js"
       },
       {
         "type": "file",
@@ -1267,6 +1323,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/README.md",
+        "name": "README.md",
+        "size": 904,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "packages/api/create-admin.cjs",
         "name": "create-admin.cjs",
         "size": 1501,
@@ -1413,6 +1476,241 @@
         "extension": ".json"
       },
       {
+        "type": "file",
+        "path": "packages/api/package.json",
+        "name": "package.json",
+        "size": 1249,
+        "extension": ".json"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/prisma",
+        "name": "prisma"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/prisma/schema.prisma",
+        "name": "schema.prisma",
+        "size": 475,
+        "extension": ".prisma"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src",
+        "name": "src"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/config",
+        "name": "config"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/database.ts",
+        "name": "database.ts",
+        "size": 691,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/env.ts",
+        "name": "env.ts",
+        "size": 955,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/logger.ts",
+        "name": "logger.ts",
+        "size": 728,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/controllers",
+        "name": "controllers"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/index.ts",
+        "name": "index.ts",
+        "size": 287,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/middleware",
+        "name": "middleware"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/audit.middleware.ts",
+        "name": "audit.middleware.ts",
+        "size": 489,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/auth.middleware.ts",
+        "name": "auth.middleware.ts",
+        "size": 788,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/csrf.ts",
+        "name": "csrf.ts",
+        "size": 227,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/errorHandler.ts",
+        "name": "errorHandler.ts",
+        "size": 523,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/rateLimiter.ts",
+        "name": "rateLimiter.ts",
+        "size": 483,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/security.ts",
+        "name": "security.ts",
+        "size": 497,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/validation.middleware.ts",
+        "name": "validation.middleware.ts",
+        "size": 543,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/models",
+        "name": "models"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/User.ts",
+        "name": "User.ts",
+        "size": 381,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/routes",
+        "name": "routes"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/auth.routes.ts",
+        "name": "auth.routes.ts",
+        "size": 447,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/index.ts",
+        "name": "index.ts",
+        "size": 244,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/users.routes.ts",
+        "name": "users.routes.ts",
+        "size": 443,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/server.ts",
+        "name": "server.ts",
+        "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/services",
+        "name": "services"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/types",
+        "name": "types"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/express.d.ts",
+        "name": "express.d.ts",
+        "size": 200,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/index.ts",
+        "name": "index.ts",
+        "size": 30,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/utils",
+        "name": "utils"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/encryption.ts",
+        "name": "encryption.ts",
+        "size": 334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/validators.ts",
+        "name": "validators.ts",
+        "size": 463,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/tests",
+        "name": "tests"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/setup.ts",
+        "name": "setup.ts",
+        "size": 121,
+        "extension": ".ts"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/tests/utils",
+        "name": "utils"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/utils/testHelpers.ts",
+        "name": "testHelpers.ts",
+        "size": 282,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tsconfig.json",
+        "name": "tsconfig.json",
+        "size": 582,
+        "extension": ".json"
+      },
+      {
         "type": "directory",
         "path": "pages",
         "name": "pages"
@@ -1447,6 +1745,13 @@
         "name": "pnpm-workspace.yaml",
         "size": 27,
         "extension": ".yaml"
+      },
+      {
+        "type": "file",
+        "path": "project-audit-data.json",
+        "name": "project-audit-data.json",
+        "size": 174160,
+        "extension": ".json"
       },
       {
         "type": "file",
@@ -2464,6 +2769,13 @@
       },
       {
         "type": "file",
+        "path": "MISSING_FILES_CREATED.md",
+        "name": "MISSING_FILES_CREATED.md",
+        "size": 2352,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "Makefile",
         "name": "Makefile",
         "size": 1213,
@@ -2474,6 +2786,13 @@
         "path": "POSTMAN_WORKFLOW_GUIDE.md",
         "name": "POSTMAN_WORKFLOW_GUIDE.md",
         "size": 4515,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJECT_AUDIT_REPORT.md",
+        "name": "PROJECT_AUDIT_REPORT.md",
+        "size": 9782,
         "extension": ".md"
       },
       {
@@ -2709,6 +3028,13 @@
       },
       {
         "type": "file",
+        "path": "backend/.env.example",
+        "name": ".env.example",
+        "size": 288,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "backend/.env.local",
         "name": ".env.local",
         "size": 254,
@@ -2727,6 +3053,13 @@
         "name": "Gemfile",
         "size": 386,
         "extension": ""
+      },
+      {
+        "type": "file",
+        "path": "backend/README.md",
+        "name": "README.md",
+        "size": 429,
+        "extension": ".md"
       },
       {
         "type": "file",
@@ -2818,6 +3151,13 @@
         "name": "TopNavigation.tsx",
         "size": 7106,
         "extension": ".tsx"
+      },
+      {
+        "type": "file",
+        "path": "create-missing-files.cjs",
+        "name": "create-missing-files.cjs",
+        "size": 22711,
+        "extension": ".cjs"
       },
       {
         "type": "file",
@@ -3178,6 +3518,13 @@
       },
       {
         "type": "file",
+        "path": "frontend/.env.example",
+        "name": ".env.example",
+        "size": 105,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "frontend/.env.local",
         "name": ".env.local",
         "size": 231,
@@ -3192,10 +3539,24 @@
       },
       {
         "type": "file",
+        "path": "frontend/README.md",
+        "name": "README.md",
+        "size": 566,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "frontend/next-env.d.ts",
         "name": "next-env.d.ts",
         "size": 200,
         "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "frontend/next.config.js",
+        "name": "next.config.js",
+        "size": 238,
+        "extension": ".js"
       },
       {
         "type": "file",
@@ -3528,6 +3889,13 @@
       },
       {
         "type": "file",
+        "path": "packages/api/README.md",
+        "name": "README.md",
+        "size": 904,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "packages/api/create-admin.cjs",
         "name": "create-admin.cjs",
         "size": 1501,
@@ -3675,6 +4043,181 @@
       },
       {
         "type": "file",
+        "path": "packages/api/package.json",
+        "name": "package.json",
+        "size": 1249,
+        "extension": ".json"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/prisma/schema.prisma",
+        "name": "schema.prisma",
+        "size": 475,
+        "extension": ".prisma"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/database.ts",
+        "name": "database.ts",
+        "size": 691,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/env.ts",
+        "name": "env.ts",
+        "size": 955,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/logger.ts",
+        "name": "logger.ts",
+        "size": 728,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/index.ts",
+        "name": "index.ts",
+        "size": 287,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/audit.middleware.ts",
+        "name": "audit.middleware.ts",
+        "size": 489,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/auth.middleware.ts",
+        "name": "auth.middleware.ts",
+        "size": 788,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/csrf.ts",
+        "name": "csrf.ts",
+        "size": 227,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/errorHandler.ts",
+        "name": "errorHandler.ts",
+        "size": 523,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/rateLimiter.ts",
+        "name": "rateLimiter.ts",
+        "size": 483,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/security.ts",
+        "name": "security.ts",
+        "size": 497,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/validation.middleware.ts",
+        "name": "validation.middleware.ts",
+        "size": 543,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/User.ts",
+        "name": "User.ts",
+        "size": 381,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/auth.routes.ts",
+        "name": "auth.routes.ts",
+        "size": 447,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/index.ts",
+        "name": "index.ts",
+        "size": 244,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/users.routes.ts",
+        "name": "users.routes.ts",
+        "size": 443,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/server.ts",
+        "name": "server.ts",
+        "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/express.d.ts",
+        "name": "express.d.ts",
+        "size": 200,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/index.ts",
+        "name": "index.ts",
+        "size": 30,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/encryption.ts",
+        "name": "encryption.ts",
+        "size": 334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/validators.ts",
+        "name": "validators.ts",
+        "size": 463,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/setup.ts",
+        "name": "setup.ts",
+        "size": 121,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/utils/testHelpers.ts",
+        "name": "testHelpers.ts",
+        "size": 282,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tsconfig.json",
+        "name": "tsconfig.json",
+        "size": 582,
+        "extension": ".json"
+      },
+      {
+        "type": "file",
         "path": "pages/admin/users.html",
         "name": "users.html",
         "size": 5013,
@@ -3693,6 +4236,13 @@
         "name": "pnpm-workspace.yaml",
         "size": 27,
         "extension": ".yaml"
+      },
+      {
+        "type": "file",
+        "path": "project-audit-data.json",
+        "name": "project-audit-data.json",
+        "size": 174160,
+        "extension": ".json"
       },
       {
         "type": "file",
@@ -4675,6 +5225,66 @@
       },
       {
         "type": "directory",
+        "path": "packages/api/prisma",
+        "name": "prisma"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src",
+        "name": "src"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/config",
+        "name": "config"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/controllers",
+        "name": "controllers"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/middleware",
+        "name": "middleware"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/models",
+        "name": "models"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/routes",
+        "name": "routes"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/services",
+        "name": "services"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/types",
+        "name": "types"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/src/utils",
+        "name": "utils"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/tests",
+        "name": "tests"
+      },
+      {
+        "type": "directory",
+        "path": "packages/api/tests/utils",
+        "name": "utils"
+      },
+      {
+        "type": "directory",
         "path": "pages",
         "name": "pages"
       },
@@ -4787,36 +5397,7 @@
   },
   "missing": {
     "packages/api": {
-      "required": [
-        "package.json",
-        "tsconfig.json",
-        "README.md",
-        "src/index.ts",
-        "src/server.ts",
-        "src/config/env.ts",
-        "src/config/logger.ts",
-        "src/config/database.ts",
-        "src/controllers/.gitkeep",
-        "src/middleware/auth.middleware.ts",
-        "src/middleware/errorHandler.ts",
-        "src/middleware/validation.middleware.ts",
-        "src/middleware/security.ts",
-        "src/middleware/rateLimiter.ts",
-        "src/middleware/csrf.ts",
-        "src/middleware/audit.middleware.ts",
-        "src/models/User.ts",
-        "src/routes/index.ts",
-        "src/routes/auth.routes.ts",
-        "src/routes/users.routes.ts",
-        "src/services/.gitkeep",
-        "src/utils/validators.ts",
-        "src/utils/encryption.ts",
-        "src/types/index.ts",
-        "src/types/express.d.ts",
-        "tests/setup.ts",
-        "tests/utils/testHelpers.ts",
-        "prisma/schema.prisma"
-      ],
+      "required": [],
       "optional": [
         "src/config/redis.ts",
         "src/models/Document.ts",
@@ -4831,21 +5412,14 @@
       ]
     },
     "backend": {
-      "required": [
-        ".env.example",
-        "README.md"
-      ],
+      "required": [],
       "optional": [
         "node_modules/",
         "uploads/"
       ]
     },
     "frontend": {
-      "required": [
-        "next.config.js",
-        "README.md",
-        ".env.example"
-      ],
+      "required": [],
       "optional": [
         "node_modules/",
         ".next/"
@@ -4882,6 +5456,13 @@
         "path": "backend/docs/KYC_API.md",
         "name": "KYC_API.md",
         "size": 3107,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "backend/README.md",
+        "name": "README.md",
+        "size": 429,
         "extension": ".md"
       },
       {
@@ -4998,6 +5579,13 @@
       },
       {
         "type": "file",
+        "path": "frontend/README.md",
+        "name": "README.md",
+        "size": 566,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "k8s/README.md",
         "name": "README.md",
         "size": 1846,
@@ -5008,6 +5596,13 @@
         "path": "MCP_SETUP_GUIDE.md",
         "name": "MCP_SETUP_GUIDE.md",
         "size": 3431,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "MISSING_FILES_CREATED.md",
+        "name": "MISSING_FILES_CREATED.md",
+        "size": 2352,
         "extension": ".md"
       },
       {
@@ -5061,9 +5656,23 @@
       },
       {
         "type": "file",
+        "path": "packages/api/README.md",
+        "name": "README.md",
+        "size": 904,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
         "path": "POSTMAN_WORKFLOW_GUIDE.md",
         "name": "POSTMAN_WORKFLOW_GUIDE.md",
         "size": 4515,
+        "extension": ".md"
+      },
+      {
+        "type": "file",
+        "path": "PROJECT_AUDIT_REPORT.md",
+        "name": "PROJECT_AUDIT_REPORT.md",
+        "size": 9782,
         "extension": ".md"
       },
       {
@@ -5256,6 +5865,13 @@
         "name": "Gemfile",
         "size": 386,
         "extension": ""
+      },
+      {
+        "type": "file",
+        "path": "create-missing-files.cjs",
+        "name": "create-missing-files.cjs",
+        "size": 22711,
+        "extension": ".cjs"
       },
       {
         "type": "file",
@@ -5576,6 +6192,13 @@
       },
       {
         "type": "file",
+        "path": "backend/.env.example",
+        "name": ".env.example",
+        "size": 288,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "backend/.env.local",
         "name": ".env.local",
         "size": 254,
@@ -5695,10 +6318,24 @@
       },
       {
         "type": "file",
+        "path": "frontend/.env.example",
+        "name": ".env.example",
+        "size": 105,
+        "extension": ".example"
+      },
+      {
+        "type": "file",
         "path": "frontend/.env.local",
         "name": ".env.local",
         "size": 231,
         "extension": ".local"
+      },
+      {
+        "type": "file",
+        "path": "frontend/next.config.js",
+        "name": "next.config.js",
+        "size": 238,
+        "extension": ".js"
       },
       {
         "type": "file",
@@ -5919,10 +6556,31 @@
       },
       {
         "type": "file",
+        "path": "packages/api/package.json",
+        "name": "package.json",
+        "size": 1249,
+        "extension": ".json"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tsconfig.json",
+        "name": "tsconfig.json",
+        "size": 582,
+        "extension": ".json"
+      },
+      {
+        "type": "file",
         "path": "pnpm-workspace.yaml",
         "name": "pnpm-workspace.yaml",
         "size": 27,
         "extension": ".yaml"
+      },
+      {
+        "type": "file",
+        "path": "project-audit-data.json",
+        "name": "project-audit-data.json",
+        "size": 174160,
+        "extension": ".json"
       },
       {
         "type": "file",
@@ -6354,6 +7012,160 @@
         "name": "fix-imports.js",
         "size": 1700,
         "extension": ".js"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/database.ts",
+        "name": "database.ts",
+        "size": 691,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/env.ts",
+        "name": "env.ts",
+        "size": 955,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/config/logger.ts",
+        "name": "logger.ts",
+        "size": 728,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/index.ts",
+        "name": "index.ts",
+        "size": 287,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/audit.middleware.ts",
+        "name": "audit.middleware.ts",
+        "size": 489,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/auth.middleware.ts",
+        "name": "auth.middleware.ts",
+        "size": 788,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/csrf.ts",
+        "name": "csrf.ts",
+        "size": 227,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/errorHandler.ts",
+        "name": "errorHandler.ts",
+        "size": 523,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/rateLimiter.ts",
+        "name": "rateLimiter.ts",
+        "size": 483,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/security.ts",
+        "name": "security.ts",
+        "size": 497,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/middleware/validation.middleware.ts",
+        "name": "validation.middleware.ts",
+        "size": 543,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/models/User.ts",
+        "name": "User.ts",
+        "size": 381,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/auth.routes.ts",
+        "name": "auth.routes.ts",
+        "size": 447,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/index.ts",
+        "name": "index.ts",
+        "size": 244,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/routes/users.routes.ts",
+        "name": "users.routes.ts",
+        "size": 443,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/server.ts",
+        "name": "server.ts",
+        "size": 821,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/express.d.ts",
+        "name": "express.d.ts",
+        "size": 200,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/types/index.ts",
+        "name": "index.ts",
+        "size": 30,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/encryption.ts",
+        "name": "encryption.ts",
+        "size": 334,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/src/utils/validators.ts",
+        "name": "validators.ts",
+        "size": 463,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/setup.ts",
+        "name": "setup.ts",
+        "size": 121,
+        "extension": ".ts"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/tests/utils/testHelpers.ts",
+        "name": "testHelpers.ts",
+        "size": 282,
+        "extension": ".ts"
       },
       {
         "type": "file",
@@ -6969,6 +7781,13 @@
         "name": "init.sql",
         "size": 300,
         "extension": ".sql"
+      },
+      {
+        "type": "file",
+        "path": "packages/api/prisma/schema.prisma",
+        "name": "schema.prisma",
+        "size": 475,
+        "extension": ".prisma"
       }
     ],
     "assets": [
@@ -7031,20 +7850,20 @@
     ]
   },
   "statistics": {
-    "totalFiles": 307,
-    "totalDirectories": 48,
+    "totalFiles": 342,
+    "totalDirectories": 60,
     "categoryCounts": {
-      "documentation": 54,
-      "other": 42,
-      "configuration": 69,
+      "documentation": 59,
+      "other": 43,
+      "configuration": 75,
       "infrastructure": 8,
-      "source": 78,
+      "source": 100,
       "scripts": 44,
       "tests": 3,
-      "database": 1,
+      "database": 2,
       "assets": 8
     },
-    "missingRequired": 34,
+    "missingRequired": 1,
     "missingOptional": 16
   }
 }
