@@ -55,11 +55,21 @@ fi
 # Check if migrations have been applied
 echo ""
 echo "5. Checking database tables..."
-TABLES=$(docker exec solia-postgres psql -U postgres -d sci_solia_invest -t -c "\dt" | wc -l)
-if [ "$TABLES" -gt 5 ]; then
-    echo "   ✅ Database tables exist"
+# Check for specific required tables instead of counting
+REQUIRED_TABLES=("users" "scis" "properties" "investments" "documents")
+MISSING_TABLES=()
+
+for table in "${REQUIRED_TABLES[@]}"; do
+    if ! docker exec solia-postgres psql -U postgres -d sci_solia_invest -t -c "\dt $table" 2>/dev/null | grep -q "$table"; then
+        MISSING_TABLES+=("$table")
+    fi
+done
+
+if [ ${#MISSING_TABLES[@]} -eq 0 ]; then
+    echo "   ✅ All required database tables exist"
 else
-    echo "   ⚠️  No tables found, run: cd backend && npm run prisma:migrate"
+    echo "   ⚠️  Missing tables: ${MISSING_TABLES[*]}"
+    echo "   Run: cd backend && npm run prisma:migrate"
 fi
 
 # Check if data has been seeded

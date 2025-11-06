@@ -2,8 +2,14 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+// WARNING: These are example seed passwords for DEVELOPMENT ONLY
+// In production, never use hardcoded passwords
+// Generate proper bcrypt hashes using: bcrypt.hash(password, 10)
+const DEV_PASSWORD_HASH = process.env.SEED_PASSWORD_HASH || '$2a$10$YourHashedPasswordHere';
+
 async function main() {
   console.log('🌱 Starting database seeding...');
+  console.log('⚠️  WARNING: Using development passwords - DO NOT USE IN PRODUCTION');
 
   // Create admin user
   const adminUser = await prisma.user.upsert({
@@ -11,7 +17,7 @@ async function main() {
     update: {},
     create: {
       email: 'admin@scisoliainvest.com',
-      password: '$2a$10$YourHashedPasswordHere', // In real app, hash this properly
+      password: DEV_PASSWORD_HASH, // Use environment variable or bcrypt in production
       firstName: 'Admin',
       lastName: 'SCI Solia',
       role: 'ADMIN',
@@ -25,7 +31,7 @@ async function main() {
     update: {},
     create: {
       email: 'investor@scisoliainvest.com',
-      password: '$2a$10$YourHashedPasswordHere', // In real app, hash this properly
+      password: DEV_PASSWORD_HASH, // Use environment variable or bcrypt in production
       firstName: 'Jean',
       lastName: 'Dupont',
       role: 'INVESTOR',
