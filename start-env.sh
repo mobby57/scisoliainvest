@@ -88,7 +88,9 @@ case $ENVIRONMENT in
         BACKEND_URL="http://localhost:5001"
         # Charger les variables d'environnement si le fichier existe
         if [ -f ".env.staging" ]; then
-            export $(cat .env.staging | grep -v '^#' | xargs)
+            set -a
+            source .env.staging
+            set +a
         else
             print_warning "Fichier .env.staging non trouvé. Exécutez './setup-env.sh' pour le créer."
         fi
@@ -137,13 +139,22 @@ case $COMMAND in
         print_info "Attente du démarrage des services..."
         sleep 3
         
-        # Attendre que les services soient healthy (max 60 secondes)
+        # Attendre que les services principaux soient healthy (max 60 secondes)
         print_info "Vérification de la santé des services..."
-        for i in {1..12}; do
-            if docker-compose -f "$COMPOSE_FILE" ps | grep -q "healthy"; then
+        max_attempts=12
+        attempt=0
+        while [ $attempt -lt $max_attempts ]; do
+            healthy_count=$(docker-compose -f "$COMPOSE_FILE" ps | grep -c "healthy" || echo "0")
+            if [ "$healthy_count" -gt 0 ]; then
+                print_success "Services démarrés (${healthy_count} services healthy)"
                 break
             fi
-            sleep 5
+            attempt=$((attempt + 1))
+            if [ $attempt -lt $max_attempts ]; then
+                sleep 5
+            else
+                print_warning "Certains services n'ont pas démarré correctement. Vérifiez les logs."
+            fi
         done
         
         # Vérifier le statut

@@ -98,7 +98,25 @@ switch ($Command) {
         
         # Attendre que les services soient prêts
         Write-Info "Attente du démarrage des services..."
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 3
+        
+        # Attendre que les services soient healthy (max 60 secondes)
+        Write-Info "Vérification de la santé des services..."
+        $maxAttempts = 12
+        $attempt = 0
+        while ($attempt -lt $maxAttempts) {
+            $healthyServices = (docker-compose -f $ComposeFile ps | Select-String "healthy").Count
+            if ($healthyServices -gt 0) {
+                Write-Success "Services démarrés ($healthyServices services healthy)"
+                break
+            }
+            $attempt++
+            if ($attempt -lt $maxAttempts) {
+                Start-Sleep -Seconds 5
+            } else {
+                Write-Warning-Custom "Certains services n'ont pas démarré correctement. Vérifiez les logs."
+            }
+        }
         
         # Vérifier le statut
         docker-compose -f $ComposeFile ps

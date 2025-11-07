@@ -2,6 +2,10 @@ version: '3.8'
 
 # Configuration Docker pour l'environnement STAGING
 # Environnement de pré-production pour les tests utilisateurs
+#
+# IMPORTANT: Créez un fichier .env.staging avec vos credentials avant de démarrer
+# Utilisez './setup-env.sh' ou '.\setup-env.ps1' pour générer les fichiers nécessaires
+# Ne démarrez JAMAIS cet environnement avec les mots de passe par défaut !
 
 services:
   # MongoDB Database - Staging
