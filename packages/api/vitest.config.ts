@@ -13,8 +13,7 @@ export default defineConfig({
     exclude: [
       'node_modules',
       'dist',
-      'build',
-      '.*.{test,spec}.{ts,js}'
+      'build'
     ],
     coverage: {
       provider: 'v8',
