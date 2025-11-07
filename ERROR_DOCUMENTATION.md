@@ -767,4 +767,4 @@ Pour toute question ou problème non couvert dans cette documentation :
 
 ---
 
-*Dernière mise à jour : 2025-11-07*
+*Dernière mise à jour : 2024-11-07*
