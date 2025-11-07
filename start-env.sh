@@ -91,6 +91,14 @@ case $ENVIRONMENT in
             set -a
             source .env.staging
             set +a
+            
+            # Valider que les variables critiques sont définies et ne sont pas des placeholders
+            if [[ "${MONGO_STAGING_PASSWORD}" == *"CHANGE_THIS"* ]] || [[ "${STAGING_JWT_SECRET}" == *"REPLACE_WITH"* ]]; then
+                print_error "Configuration non sécurisée détectée dans .env.staging"
+                print_warning "Veuillez modifier .env.staging et remplacer tous les placeholders par des valeurs sécurisées"
+                print_info "Générez des secrets avec: openssl rand -base64 64"
+                exit 1
+            fi
         else
             print_warning "Fichier .env.staging non trouvé. Exécutez './setup-env.sh' pour le créer."
         fi

@@ -57,6 +57,28 @@ switch ($Environment) {
         $EnvName = "Staging"
         $FrontendUrl = "http://localhost:5174"
         $BackendUrl = "http://localhost:5001"
+        
+        # Charger les variables d'environnement si le fichier existe
+        if (Test-Path ".env.staging") {
+            Get-Content ".env.staging" | ForEach-Object {
+                if ($_ -match '^\s*([^#][^=]*)\s*=\s*(.*)$') {
+                    [Environment]::SetEnvironmentVariable($matches[1].Trim(), $matches[2].Trim(), "Process")
+                }
+            }
+            
+            # Valider que les variables critiques ne contiennent pas de placeholders
+            $mongoPassword = [Environment]::GetEnvironmentVariable("MONGO_STAGING_PASSWORD", "Process")
+            $jwtSecret = [Environment]::GetEnvironmentVariable("STAGING_JWT_SECRET", "Process")
+            
+            if ($mongoPassword -like "*CHANGE_THIS*" -or $jwtSecret -like "*REPLACE_WITH*") {
+                Write-Error-Custom "Configuration non sécurisée détectée dans .env.staging"
+                Write-Warning-Custom "Veuillez modifier .env.staging et remplacer tous les placeholders par des valeurs sécurisées"
+                Write-Info "Générez des secrets avec: openssl rand -base64 64"
+                exit 1
+            }
+        } else {
+            Write-Warning-Custom "Fichier .env.staging non trouvé. Exécutez '.\setup-env.ps1' pour le créer."
+        }
     }
     {$_ -in 'prod', 'production'} {
         $ComposeFile = "docker-compose.prod.yml"
