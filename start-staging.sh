@@ -97,7 +97,7 @@ echo ""
 # Test du health check
 echo "🔍 Test du health check..."
 sleep 5
-if curl -f http://localhost:5001/api/health 2>/dev/null; then
+if curl -f --connect-timeout 10 --max-time 30 http://localhost:5001/api/health 2>/dev/null; then
     echo "✅ Backend API est opérationnel!"
 else
     echo "⚠️  Backend API n'a pas encore répondu (peut prendre quelques minutes)"
