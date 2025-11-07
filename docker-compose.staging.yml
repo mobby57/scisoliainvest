@@ -1,0 +1,148 @@
+version: '3.8'
+
+# Docker Compose pour environnement Staging
+# À utiliser pour les tests utilisateurs avant le déploiement en production
+
+services:
+  # MongoDB Database - Staging
+  mongo-staging:
+    image: mongo:7.0
+    container_name: solia-mongo-staging
+    restart: unless-stopped
+    ports:
+      - "27018:27017"  # Port différent pour ne pas confliter avec dev
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: solia_staging
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_STAGING_PASSWORD:-staging_password_change_me}
+      MONGO_INITDB_DATABASE: solia-staging
+    volumes:
+      - mongo-staging-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - solia-staging-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis - Staging (optionnel, pour cache et sessions)
+  redis-staging:
+    image: redis:7-alpine
+    container_name: solia-redis-staging
+    restart: unless-stopped
+    ports:
+      - "6380:6379"  # Port différent pour ne pas confliter avec dev
+    volumes:
+      - redis-staging-data:/data
+    networks:
+      - solia-staging-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend Express API - Staging
+  backend-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        NODE_ENV: staging
+    container_name: solia-backend-staging
+    restart: unless-stopped
+    ports:
+      - "5001:5000"  # Port externe différent
+    environment:
+      - NODE_ENV=staging
+      - PORT=5000
+      - DATABASE_URL=mongodb://solia_staging:${MONGO_STAGING_PASSWORD:-staging_password_change_me}@mongo-staging:27017/solia-staging?authSource=admin
+      - REDIS_URL=redis://redis-staging:6379
+      - JWT_SECRET=${JWT_SECRET_STAGING:-staging_jwt_secret_replace_in_production}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET_STAGING:-staging_refresh_secret}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:5174}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:5174}
+      - LOG_LEVEL=debug
+      - ENABLE_AUDIT_LOGS=true
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - staging-uploads:/app/uploads
+    depends_on:
+      mongo-staging:
+        condition: service_healthy
+      redis-staging:
+        condition: service_healthy
+    networks:
+      - solia-staging-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:5000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend React Vite - Staging
+  frontend-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_URL: http://localhost:5001/api
+    container_name: solia-frontend-staging
+    restart: unless-stopped
+    ports:
+      - "5174:5173"  # Port différent pour staging
+    environment:
+      - VITE_API_URL=http://localhost:5001/api
+      - VITE_ENV=staging
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      backend-staging:
+        condition: service_healthy
+    networks:
+      - solia-staging-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy - Staging (optionnel)
+  nginx-staging:
+    image: nginx:alpine
+    container_name: solia-nginx-staging
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./nginx/staging.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl-staging:/etc/nginx/ssl:ro
+      - staging-uploads:/var/www/uploads:ro
+    depends_on:
+      - frontend-staging
+      - backend-staging
+    networks:
+      - solia-staging-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mongo-staging-data:
+    driver: local
+  redis-staging-data:
+    driver: local
+  staging-uploads:
+    driver: local
+
+networks:
+  solia-staging-network:
+    driver: bridge
+    name: solia-staging-network
