@@ -1,5 +1,14 @@
 # TODO PRIORITAIRE - SCI Solia Invest
 
+## ✅ RÉCEMMENT COMPLÉTÉ (Novembre 2025)
+
+### Mise à jour du projet
+- [x] Mise à jour de toutes les dépendances (root, backend, frontend)
+- [x] Correction de toutes les vulnérabilités de sécurité critiques
+- [x] Mise à jour de Next.js vers 14.2.33 (patches de sécurité)
+- [x] Mise à jour de la documentation (README.md)
+- [x] Installation des dépendances manquantes
+
 ## 🔴 CRITIQUE (Faire maintenant)
 
 ### 1. BASE DE DONNÉES
@@ -17,6 +26,7 @@
 ## 🟡 IMPORTANT (Faire cette semaine)
 
 ### 3. FRONTEND FIXES
+- [ ] Migrer website/ vers frontend/ (Next.js)
 - [ ] Corriger types User dupliqués
 - [ ] Améliorer gestion erreurs API
 - [ ] Fixer redirections auth
@@ -42,11 +52,13 @@
 - [ ] CI/CD pipeline
 - [ ] Monitoring
 
-## 📊 STATUT ACTUEL
-✅ Backend API basique (5000)
-✅ Frontend React (5173)  
+## 📊 STATUT ACTUEL (Mis à jour: Novembre 2025)
+✅ Backend API basique (port 3000)
+✅ Frontend React components (en préparation)
 ✅ Authentification JWT
 ✅ Routes CRUD basiques
+✅ **Dépendances à jour (0 vulnérabilités)**
+✅ **Documentation améliorée**
 ❌ Base de données persistante
 ❌ Upload fichiers
 ❌ Tests automatisés
