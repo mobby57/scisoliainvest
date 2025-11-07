@@ -59,7 +59,8 @@ echo ""
 
 # Étape 5: Vérification de l'installation
 echo "Étape 5/5: Vérification de l'installation..."
-if python -c "import pytest" 2>/dev/null; then
+# Utiliser python3 pour cohérence avec la création du venv
+if python3 -c "import pytest" 2>/dev/null; then
     echo "✅ pytest est correctement installé."
     pytest_version=$(pytest --version 2>&1 | head -n 1)
     echo "   Version: $pytest_version"

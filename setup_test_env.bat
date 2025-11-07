@@ -84,6 +84,7 @@ if errorlevel 1 (
     exit /b 1
 ) else (
     echo ✅ pytest est correctement installé.
+    REM Récupérer et afficher la version de pytest (2>&1 redirige stderr vers stdout)
     for /f "delims=" %%i in ('pytest --version 2^>^&1') do (
         echo    Version: %%i
         goto :version_done
@@ -99,6 +100,7 @@ echo ========================================
 echo.
 
 REM Vérifier s'il existe des fichiers de test
+REM dir /s /b trouve les fichiers récursivement, findstr vérifie si la sortie n'est pas vide
 dir /s /b test_*.py *_test.py 2>nul | findstr /r ".*" >nul
 if errorlevel 1 (
     echo ℹ️  Aucun fichier de test trouvé (test_*.py ou *_test.py).
