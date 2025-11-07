@@ -1,5 +1,12 @@
 node_modules
 
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+.next/
+out/
+
 # Fichiers d'environnement à ne jamais committer
 .env
 .env.*
@@ -7,3 +14,28 @@ node_modules
 !.env*.example
 !.env.example
 .env.client.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE - user-specific files
+.idea/
+*.swp
+*.swo
+.vscode/*.code-workspace
+.vscode/settings.local.json
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+.cache/
