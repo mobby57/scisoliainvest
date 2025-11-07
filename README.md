@@ -2,6 +2,22 @@
 
 Welcome to the SCI Solia Invest Platform repository! This project aims to provide a comprehensive SaaS solution for managing investments and properties.
 
+## ⚡ Démarrage Rapide pour Tests Utilisateurs
+
+**Vous voulez faire des tests utilisateurs tout de suite?** 
+
+👉 **[Suivez ce guide de 5 minutes](START_TESTING_NOW.md)**
+
+```bash
+# Linux/Mac
+./setup-env.sh && ./start-env.sh staging start
+
+# Windows
+.\setup-env.ps1; .\start-env.ps1 -Environment staging -Command start
+```
+
+Puis ouvrez: **http://localhost:5174**
+
 ## 🌍 Environnements Disponibles
 
 Ce projet supporte trois environnements distincts pour différentes phases du cycle de développement:
@@ -92,7 +108,10 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## 📚 Documentation
 
+- **[⚡ Démarrage Rapide (5 min)](START_TESTING_NOW.md)** - Pour lancer les tests immédiatement
+- **[Quand Faire des Essais?](QUAND_FAIRE_ESSAIS.md)** - Réponse à vos questions sur les tests
 - [Guide des Environnements](ENVIRONMENT_GUIDE.md) - Guide complet des environnements Dev/Staging/Prod
+- [Guide Rapide Staging](QUICK_START_STAGING.md) - Référence rapide pour staging
 - [README-SETUP.md](README-SETUP.md) - Guide d'installation détaillé
 - [README-DOCKER.md](README-DOCKER.md) - Guide Docker complet
 - [TESTING_GUIDE.md](TESTING_GUIDE.md) - Guide des tests
