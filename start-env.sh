@@ -86,6 +86,12 @@ case $ENVIRONMENT in
         ENV_NAME="Staging"
         FRONTEND_URL="http://localhost:5174"
         BACKEND_URL="http://localhost:5001"
+        # Charger les variables d'environnement si le fichier existe
+        if [ -f ".env.staging" ]; then
+            export $(cat .env.staging | grep -v '^#' | xargs)
+        else
+            print_warning "Fichier .env.staging non trouvé. Exécutez './setup-env.sh' pour le créer."
+        fi
         ;;
     prod|production)
         COMPOSE_FILE="docker-compose.prod.yml"
@@ -129,7 +135,16 @@ case $COMMAND in
         
         # Attendre que les services soient prêts
         print_info "Attente du démarrage des services..."
-        sleep 5
+        sleep 3
+        
+        # Attendre que les services soient healthy (max 60 secondes)
+        print_info "Vérification de la santé des services..."
+        for i in {1..12}; do
+            if docker-compose -f "$COMPOSE_FILE" ps | grep -q "healthy"; then
+                break
+            fi
+            sleep 5
+        done
         
         # Vérifier le statut
         docker-compose -f "$COMPOSE_FILE" ps
@@ -164,7 +179,13 @@ case $COMMAND in
         # Tester la connectivité
         print_info "Test de connectivité..."
         if [ "$ENVIRONMENT" != "prod" ]; then
-            curl -s -o /dev/null -w "Backend Health Check: %{http_code}\n" "${BACKEND_URL}/api/health" || print_warning "Backend non accessible"
+            if command -v curl &> /dev/null; then
+                curl -s -o /dev/null -w "Backend Health Check: %{http_code}\n" "${BACKEND_URL}/api/health" || print_warning "Backend non accessible"
+            elif command -v wget &> /dev/null; then
+                wget -q --spider "${BACKEND_URL}/api/health" && print_success "Backend accessible" || print_warning "Backend non accessible"
+            else
+                print_warning "curl ou wget non disponible, impossible de vérifier la connectivité"
+            fi
         fi
         ;;
         

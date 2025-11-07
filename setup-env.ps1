@@ -36,6 +36,10 @@ Setup-EnvFile "packages/api/.env.staging.example" "packages/api/.env.staging" "p
 Write-Host "Configuration Frontend..." -ForegroundColor Blue
 Setup-EnvFile "frontend/.env.staging.example" "frontend/.env.staging" "frontend/.env.staging"
 
+# Configuration Docker Compose Staging
+Write-Host "Configuration Docker Compose..." -ForegroundColor Blue
+Setup-EnvFile ".env.staging.example" ".env.staging" ".env.staging (pour docker-compose)"
+
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Green
 Write-Host "Configuration terminée !" -ForegroundColor Green

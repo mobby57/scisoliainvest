@@ -15,9 +15,9 @@ services:
       - mongo-staging-data:/data/db
       - ./mongo-init:/docker-entrypoint-initdb.d
     environment:
-      MONGO_INITDB_ROOT_USERNAME: staging_admin
-      MONGO_INITDB_ROOT_PASSWORD: staging_password_2024
-      MONGO_INITDB_DATABASE: solia-staging
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_STAGING_USER:-staging_admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_STAGING_PASSWORD:-CHANGE_THIS_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_STAGING_DB:-solia-staging}
     networks:
       - solia-staging-network
     healthcheck:
@@ -38,11 +38,11 @@ services:
     environment:
       - NODE_ENV=staging
       - PORT=5000
-      - DATABASE_URL=mongodb://staging_admin:staging_password_2024@mongo-staging:27017/solia-staging?authSource=admin
-      - JWT_SECRET=staging_jwt_secret_CHANGE_THIS_64_chars_minimum
-      - JWT_REFRESH_SECRET=staging_refresh_secret_CHANGE_THIS_64_chars
-      - MONGO_USER=staging_admin
-      - MONGO_PASSWORD=staging_password_2024
+      - DATABASE_URL=mongodb://${MONGO_STAGING_USER:-staging_admin}:${MONGO_STAGING_PASSWORD:-CHANGE_THIS_PASSWORD}@mongo-staging:27017/${MONGO_STAGING_DB:-solia-staging}?authSource=admin
+      - JWT_SECRET=${STAGING_JWT_SECRET:-CHANGE_THIS_JWT_SECRET_MINIMUM_64_CHARACTERS}
+      - JWT_REFRESH_SECRET=${STAGING_JWT_REFRESH_SECRET:-CHANGE_THIS_REFRESH_SECRET_64_CHARS}
+      - MONGO_USER=${MONGO_STAGING_USER:-staging_admin}
+      - MONGO_PASSWORD=${MONGO_STAGING_PASSWORD:-CHANGE_THIS_PASSWORD}
       - CORS_ORIGIN=http://localhost:5174
       - LOG_LEVEL=debug
       - ENABLE_AUDIT_LOGS=true

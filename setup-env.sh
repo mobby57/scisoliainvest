@@ -44,6 +44,10 @@ setup_env_file "packages/api/.env.staging.example" "packages/api/.env.staging" "
 echo -e "${BLUE}Configuration Frontend...${NC}"
 setup_env_file "frontend/.env.staging.example" "frontend/.env.staging" "frontend/.env.staging"
 
+# Configuration Docker Compose Staging
+echo -e "${BLUE}Configuration Docker Compose...${NC}"
+setup_env_file ".env.staging.example" ".env.staging" ".env.staging (pour docker-compose)"
+
 echo ""
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}Configuration terminée !${NC}"
