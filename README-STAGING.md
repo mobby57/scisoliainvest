@@ -176,7 +176,22 @@ docker-compose -f docker-compose.staging.yml exec backend-staging env
 
 ## 🔐 Configuration des Secrets
 
-**⚠️ Important:** Avant déploiement sur un serveur, modifier les secrets!
+**⚠️ SÉCURITÉ IMPORTANTE:** Avant déploiement sur un serveur, il est CRUCIAL de changer tous les secrets par défaut!
+
+### Générer des secrets sécurisés
+
+```bash
+# Générer un JWT secret
+openssl rand -base64 64
+
+# Générer un mot de passe MongoDB
+openssl rand -base64 32
+
+# Définir via variable d'environnement
+export MONGO_STAGING_PASSWORD=$(openssl rand -base64 32)
+export JWT_SECRET_STAGING=$(openssl rand -base64 64)
+export JWT_REFRESH_SECRET_STAGING=$(openssl rand -base64 64)
+```
 
 ### Backend (`packages/api/.env.staging`)
 

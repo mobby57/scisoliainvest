@@ -29,13 +29,13 @@ echo ""
 # Vérifier les fichiers de configuration
 if [ ! -f "packages/api/.env.staging" ]; then
     echo "❌ Erreur: packages/api/.env.staging n'existe pas"
-    echo "   Créer ce fichier à partir de packages/api/.env.staging"
+    echo "   Ce fichier devrait exister dans le repository"
     exit 1
 fi
 
 if [ ! -f "frontend/.env.staging" ]; then
     echo "❌ Erreur: frontend/.env.staging n'existe pas"
-    echo "   Créer ce fichier à partir de frontend/.env.staging"
+    echo "   Ce fichier devrait exister dans le repository"
     exit 1
 fi
 

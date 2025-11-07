@@ -129,6 +129,7 @@ docker-compose -f docker-compose.staging.yml exec backend-staging npm run db:see
 
 ```bash
 # 1. Build et push des images
+# Remplacer 'votre-registry' par votre registry Docker (ex: docker.io/username ou registry.company.com)
 docker build -f Dockerfile.backend -t votre-registry/solia-api:staging .
 docker build -f Dockerfile.frontend -t votre-registry/solia-client:staging .
 
