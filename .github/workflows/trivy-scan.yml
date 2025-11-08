@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Run Trivy filesystem vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build backend Docker image
         run: docker build -f Dockerfile.backend -t scisoliainvest-backend:${{ github.sha }} .
@@ -94,7 +94,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build frontend Docker image
         run: docker build -f Dockerfile.frontend -t scisoliainvest-frontend:${{ github.sha }} .
@@ -130,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Run Trivy configuration scanner
         uses: aquasecurity/trivy-action@0.28.0

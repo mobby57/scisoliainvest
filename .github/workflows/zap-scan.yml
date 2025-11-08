@@ -37,7 +37,7 @@ jobs:
     if: ${{ github.event.inputs.scan_type == 'baseline' || github.event.inputs.scan_type == '' || github.event_name == 'schedule' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create ZAP reports directory
         run: mkdir -p zap-reports
@@ -69,7 +69,7 @@ jobs:
     if: ${{ github.event.inputs.scan_type == 'full' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create ZAP reports directory
         run: mkdir -p zap-reports
@@ -101,7 +101,7 @@ jobs:
     if: ${{ github.event.inputs.scan_type == 'baseline' || github.event.inputs.scan_type == '' || github.event_name == 'schedule' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Create ZAP reports directory
         run: mkdir -p zap-reports
