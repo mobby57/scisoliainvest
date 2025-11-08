@@ -122,7 +122,7 @@ jobs:
 
       - name: ZAP API Scan
         if: steps.check_api_spec.outputs.api_spec_exists == 'true'
-        uses: zaproxy/action-api-scan@v0.8.0
+        uses: zaproxy/action-api-scan@v0.10.0
         with:
           target: ${{ steps.check_api_spec.outputs.api_spec_file }}
           format: 'openapi'
