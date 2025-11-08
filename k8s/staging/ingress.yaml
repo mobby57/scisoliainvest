@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: solia-staging-ingress
+  namespace: solia-staging
+  labels:
+    app: solia-invest
+    environment: staging
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-staging  # Certificat Let's Encrypt staging
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+spec:
+  tls:
+    - hosts:
+        - staging.soliainvest.com
+      secretName: solia-staging-tls
+  rules:
+    - host: staging.soliainvest.com
+      http:
+        paths:
+          # Routes API
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-staging-service
+                port:
+                  number: 5000
+          # Routes frontend (par défaut)
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-staging-service
+                port:
+                  number: 80
