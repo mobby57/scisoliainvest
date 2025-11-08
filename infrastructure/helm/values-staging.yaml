@@ -1,0 +1,59 @@
+# Staging environment values
+global:
+  environment: staging
+  domain: staging.solia-invest.com
+
+image:
+  tag: staging-latest
+  pullPolicy: Always
+
+backend:
+  replicaCount: 2
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+
+frontend:
+  replicaCount: 2
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+
+postgresql:
+  primary:
+    persistence:
+      size: 10Gi
+
+redis:
+  master:
+    persistence:
+      size: 5Gi
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+  hosts:
+    - host: staging.solia-invest.com
+      paths:
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: backend
+              port: 4000
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: frontend
+              port: 3000
+  tls:
+    - secretName: staging-solia-invest-tls
+      hosts:
+        - staging.solia-invest.com
+
+monitoring:
+  enabled: true

@@ -1,0 +1,79 @@
+{{- if .Values.frontend.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "solia-invest.fullname" . }}-frontend
+  labels:
+    {{- include "solia-invest.labels" . | nindent 4 }}
+    app.kubernetes.io/component: frontend
+spec:
+  {{- if not .Values.frontend.autoscaling.enabled }}
+  replicas: {{ .Values.frontend.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "solia-invest.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: frontend
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        {{- include "solia-invest.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: frontend
+    spec:
+      serviceAccountName: {{ include "solia-invest.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: frontend
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}-{{ .Values.frontend.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.frontend.service.targetPort }}
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: {{ .Values.frontend.env.NODE_ENV | quote }}
+        - name: PORT
+          value: {{ .Values.frontend.env.PORT | quote }}
+        - name: NEXT_PUBLIC_API_URL
+          value: "https://{{ .Values.global.domain }}/api"
+        {{- if .Values.frontend.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.frontend.livenessProbe.path }}
+            port: http
+          initialDelaySeconds: {{ .Values.frontend.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.frontend.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.frontend.livenessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.frontend.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.frontend.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.frontend.readinessProbe.path }}
+            port: http
+          initialDelaySeconds: {{ .Values.frontend.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.frontend.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.frontend.readinessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.frontend.readinessProbe.failureThreshold }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.frontend.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

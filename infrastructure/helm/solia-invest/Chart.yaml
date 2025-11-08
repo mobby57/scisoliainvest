@@ -1,0 +1,19 @@
+apiVersion: v2
+name: solia-invest
+description: A Helm chart for SCI Solia Invest platform
+type: application
+version: 1.0.0
+appVersion: "2.0.0"
+
+keywords:
+  - solia-invest
+  - investment-platform
+  - saas
+
+maintainers:
+  - name: DevOps Team
+    email: devops@solia-invest.com
+
+dependencies: []
+
+icon: https://solia-invest.com/icon.png

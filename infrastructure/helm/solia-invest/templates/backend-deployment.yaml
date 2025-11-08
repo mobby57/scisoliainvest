@@ -1,0 +1,92 @@
+{{- if .Values.backend.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "solia-invest.fullname" . }}-backend
+  labels:
+    {{- include "solia-invest.labels" . | nindent 4 }}
+    app.kubernetes.io/component: backend
+spec:
+  {{- if not .Values.backend.autoscaling.enabled }}
+  replicas: {{ .Values.backend.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "solia-invest.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: backend
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        {{- include "solia-invest.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: backend
+    spec:
+      serviceAccountName: {{ include "solia-invest.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: backend
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}-{{ .Values.backend.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.backend.service.targetPort }}
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: {{ .Values.backend.env.NODE_ENV | quote }}
+        - name: PORT
+          value: {{ .Values.backend.env.PORT | quote }}
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "solia-invest.fullname" . }}-secrets
+              key: database-url
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "solia-invest.fullname" . }}-secrets
+              key: redis-url
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "solia-invest.fullname" . }}-secrets
+              key: jwt-secret
+        {{- if .Values.backend.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.backend.livenessProbe.path }}
+            port: http
+          initialDelaySeconds: {{ .Values.backend.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.backend.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.backend.livenessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.backend.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.backend.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.backend.readinessProbe.path }}
+            port: http
+          initialDelaySeconds: {{ .Values.backend.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.backend.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.backend.readinessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.backend.readinessProbe.failureThreshold }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.backend.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
