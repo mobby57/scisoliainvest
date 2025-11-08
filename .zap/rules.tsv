@@ -1,0 +1,99 @@
+# ZAP Scanning Rules Configuration
+#
+# This file contains the ZAP scanning rules for the SCI Solia Invest application.
+# Format: RULE_ID	THRESHOLD	[NOTES]
+#
+# RULE_ID: The ZAP rule identifier
+# THRESHOLD: IGNORE, INFO, WARN, or FAIL
+# NOTES: Optional notes about why the rule is configured this way
+#
+# Common Rule IDs:
+# 10010 - Cookie No HttpOnly Flag
+# 10011 - Cookie Without Secure Flag
+# 10015 - Re-examine Cache-control Directives
+# 10017 - Cross-Domain JavaScript Source File Inclusion
+# 10019 - Content-Type Header Missing
+# 10020 - X-Frame-Options Header Not Set
+# 10021 - X-Content-Type-Options Header Missing
+# 10023 - Information Disclosure - Debug Error Messages
+# 10027 - Information Disclosure - Suspicious Comments
+# 10032 - Viewstate without MAC signature
+# 10034 - Server Leaks Information via "X-Powered-By" HTTP Response Header Field(s)
+# 10035 - Strict-Transport-Security Header Not Set
+# 10036 - Server Leaks Version Information via "Server" HTTP Response Header Field
+# 10038 - Content Security Policy (CSP) Header Not Set
+# 10040 - Secure Pages Include Mixed Content
+# 10041 - HTTP to HTTPS Insecure Transition in Form Post
+# 10042 - HTTPS to HTTP Insecure Transition in Form Post
+# 10043 - User Controllable JavaScript Event (XSS)
+# 10044 - Big Redirect Detected (Potential Sensitive Information Leak)
+# 10045 - Source Code Disclosure - /WEB-INF folder
+# 10048 - Remote Code Execution - Shell Shock
+# 10049 - Content Cacheability
+# 10050 - Retrieved from Cache
+# 10051 - Relative Path Confusion
+# 10052 - X-ChromeLogger-Data (XCOLD) Header Information Leak
+# 10054 - Cookie Without SameSite Attribute
+# 10055 - CSP Scanner: Wildcard Directive
+# 10056 - X-Debug-Token Information Leak
+# 10057 - Username Hash Found
+# 10061 - X-AspNet-Version Response Header
+# 10062 - PII Disclosure
+# 10063 - Feature Policy Header Not Set / Permissions Policy Header Not Set
+# 10096 - Timestamp Disclosure
+# 10097 - Hash Disclosure
+# 10098 - Cross-Domain Misconfiguration
+# 10105 - Weak Authentication Method
+# 10109 - Modern Web Application
+# 10110 - Dangerous JS Functions
+# 10202 - Absence of Anti-CSRF Tokens
+
+# Set baseline thresholds for common security headers
+10020	WARN	X-Frame-Options Header Not Set
+10021	WARN	X-Content-Type-Options Header Missing
+10035	WARN	Strict-Transport-Security Header Not Set
+10038	WARN	Content Security Policy (CSP) Header Not Set
+10063	WARN	Permissions Policy Header Not Set
+
+# Cookie security
+10010	WARN	Cookie No HttpOnly Flag
+10011	WARN	Cookie Without Secure Flag
+10054	WARN	Cookie Without SameSite Attribute
+
+# Information disclosure - set to INFO for development artifacts
+10027	INFO	Information Disclosure - Suspicious Comments
+10096	INFO	Timestamp Disclosure
+10097	INFO	Hash Disclosure
+
+# Server information leakage
+10034	WARN	Server Leaks Information via X-Powered-By
+10036	WARN	Server Leaks Version Information via Server Header
+
+# Content and caching
+10015	INFO	Re-examine Cache-control Directives
+10049	INFO	Content Cacheability
+10050	INFO	Retrieved from Cache
+
+# Development/debugging headers - should be INFO in staging, FAIL in production
+10023	INFO	Information Disclosure - Debug Error Messages
+10052	INFO	X-ChromeLogger-Data (XCOLD) Header Information Leak
+10056	INFO	X-Debug-Token Information Leak
+
+# Cross-domain and mixed content
+10017	WARN	Cross-Domain JavaScript Source File Inclusion
+10040	FAIL	Secure Pages Include Mixed Content
+10098	WARN	Cross-Domain Misconfiguration
+
+# Form security
+10041	FAIL	HTTP to HTTPS Insecure Transition in Form Post
+10042	FAIL	HTTPS to HTTP Insecure Transition in Form Post
+
+# CSRF protection
+10202	WARN	Absence of Anti-CSRF Tokens
+
+# PII and sensitive data
+10062	WARN	PII Disclosure
+10057	INFO	Username Hash Found
+
+# Ignore rules that are not applicable or cause false positives in this application
+# Add rules below as needed based on scan results

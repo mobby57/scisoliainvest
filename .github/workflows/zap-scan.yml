@@ -1,0 +1,147 @@
+name: OWASP ZAP Security Scan
+
+on:
+  # Run nightly at 3 AM UTC
+  schedule:
+    - cron: '0 3 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: 'Target URL to scan'
+        required: false
+        default: 'https://staging.scisoliainvest.example.com'
+      scan_type:
+        description: 'Type of scan to run'
+        required: false
+        default: 'baseline'
+        type: choice
+        options:
+          - baseline
+          - full
+
+permissions:
+  contents: read
+  security-events: write
+  issues: write
+
+env:
+  # Default staging URL - update this with your actual staging URL
+  STAGING_URL: ${{ github.event.inputs.target_url || 'https://staging.scisoliainvest.example.com' }}
+  SCAN_TYPE: ${{ github.event.inputs.scan_type || 'baseline' }}
+
+jobs:
+  zap-baseline-scan:
+    name: OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.scan_type == 'baseline' || github.event.inputs.scan_type == '' || github.event_name == 'schedule' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ZAP reports directory
+        run: mkdir -p zap-reports
+
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: ${{ env.STAGING_URL }}
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a -j -l WARN'
+          allow_issue_writing: true
+          fail_action: false
+          artifact_name: 'zap-baseline-report'
+
+      - name: Upload ZAP Baseline Scan results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zap-baseline-scan-report
+          path: |
+            report_html.html
+            report_json.json
+            report_md.md
+          retention-days: 30
+
+  zap-full-scan:
+    name: OWASP ZAP Full Scan
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.scan_type == 'full' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ZAP reports directory
+        run: mkdir -p zap-reports
+
+      - name: ZAP Full Scan
+        uses: zaproxy/action-full-scan@v0.11.0
+        with:
+          target: ${{ env.STAGING_URL }}
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a -j -l WARN'
+          allow_issue_writing: true
+          fail_action: false
+          artifact_name: 'zap-full-report'
+
+      - name: Upload ZAP Full Scan results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zap-full-scan-report
+          path: |
+            report_html.html
+            report_json.json
+            report_md.md
+          retention-days: 30
+
+  zap-api-scan:
+    name: OWASP ZAP API Scan
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.scan_type == 'baseline' || github.event.inputs.scan_type == '' || github.event_name == 'schedule' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ZAP reports directory
+        run: mkdir -p zap-reports
+
+      - name: Check for API specification
+        id: check_api_spec
+        run: |
+          if [ -f "docs/api/openapi.yaml" ] || [ -f "docs/api/swagger.json" ]; then
+            echo "api_spec_exists=true" >> $GITHUB_OUTPUT
+            if [ -f "docs/api/openapi.yaml" ]; then
+              echo "api_spec_file=docs/api/openapi.yaml" >> $GITHUB_OUTPUT
+            else
+              echo "api_spec_file=docs/api/swagger.json" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "api_spec_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: ZAP API Scan
+        if: steps.check_api_spec.outputs.api_spec_exists == 'true'
+        uses: zaproxy/action-api-scan@v0.8.0
+        with:
+          target: ${{ steps.check_api_spec.outputs.api_spec_file }}
+          format: 'openapi'
+          cmd_options: '-a -j -l WARN'
+          allow_issue_writing: true
+          fail_action: false
+          artifact_name: 'zap-api-report'
+
+      - name: Upload ZAP API Scan results
+        if: steps.check_api_spec.outputs.api_spec_exists == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-api-scan-report
+          path: |
+            report_html.html
+            report_json.json
+            report_md.md
+          retention-days: 30
+
+      - name: Skip API scan
+        if: steps.check_api_spec.outputs.api_spec_exists == 'false'
+        run: echo "No API specification found, skipping API scan"

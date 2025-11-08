@@ -33,6 +33,16 @@ To get started with the project, follow these steps:
 - `infrastructure`: Infrastructure-related files (e.g., Docker, Terraform).
 - `scripts`: Utility scripts for development and deployment.
 
+## Security
+
+This project includes comprehensive security scanning:
+
+- **Dependabot**: Automated dependency updates and vulnerability alerts
+- **Trivy**: Container and filesystem vulnerability scanning
+- **OWASP ZAP**: Dynamic application security testing (DAST)
+
+For detailed information about security scanning setup and configuration, see the [Security Scanning Guide](docs/SECURITY_SCANNING_GUIDE.md).
+
 ## Contributing
 
 We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
