@@ -3,9 +3,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   
-  // Setup files
-  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.ts'],
-  
   // Test patterns
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{ts,js}',
@@ -27,7 +24,7 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'html'],
   
   // Module resolution
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@test/(.*)$': '<rootDir>/test/$1'
   },
