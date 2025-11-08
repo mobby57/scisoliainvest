@@ -75,7 +75,7 @@ jobs:
         run: mkdir -p zap-reports
 
       - name: ZAP Full Scan
-        uses: zaproxy/action-full-scan@v0.11.0
+        uses: zaproxy/action-full-scan@v0.13.0
         with:
           target: ${{ env.STAGING_URL }}
           rules_file_name: '.zap/rules.tsv'
