@@ -1,4 +1,4 @@
-# Copilot AI Agent Instructions for scisoliainvest.com
+# Copilot AI Agent Instructions for scisoliainvest
 
 Goal
 Make small, safe, verified changes quickly. Respect multi-tenant isolation, KYC, and audit rules. Run the repo quality gates before finishing any PR.
@@ -52,4 +52,9 @@ Safe-change checklist (must do before PR)
 
 If stuck
 - Inspect `packages/api/debug-tests.js`, `packages/api/scripts/README.md`, and `packages/api/prisma/schema.prisma`.
-- Tell me which area (auth/kyc/payments/docs) and I can propose a PR patch (model + service + tests).
+- Tell the team which area (auth/kyc/payments/docs) and include a minimal reproducer.
+
+Notes
+- Never commit secrets or `.env*` files.
+- Prefer Docker Compose for local DBs to ensure reproducible dev env.
+- For production secrets use a secret manager (Azure KeyVault / AWS Secrets Manager).
