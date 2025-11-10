@@ -2,6 +2,25 @@
 
 Welcome to the SCI Solia Invest Platform repository! This project aims to provide a comprehensive SaaS solution for managing investments and properties.
 
+## 📱 Installation Mobile (PWA)
+
+L'application SCI Solia Invest est disponible en tant que **Progressive Web App (PWA)** et peut être installée directement sur votre téléphone ou tablette !
+
+### Installation Rapide
+
+**Sur Android (Chrome):**
+1. Ouvrez le site dans Chrome
+2. Cliquez sur "Installer l'app" ou menu ⋮ > "Ajouter à l'écran d'accueil"
+3. Confirmez l'installation
+
+**Sur iPhone/iPad (Safari):**
+1. Ouvrez le site dans Safari
+2. Appuyez sur le bouton Partager (carré avec flèche ↑)
+3. Sélectionnez "Sur l'écran d'accueil"
+4. Appuyez sur "Ajouter"
+
+📖 **Guide complet:** Consultez [GUIDE_INSTALLATION_MOBILE.md](GUIDE_INSTALLATION_MOBILE.md) pour des instructions détaillées.
+
 ## Getting Started
 
 To get started with the project, follow these steps:
@@ -25,8 +44,18 @@ To get started with the project, follow these steps:
    pnpm dev
    ```
 
+4. **Run the frontend PWA:**
+
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
 ## Project Structure
 
+- `frontend/`: Next.js PWA application with mobile support
+- `backend/`: Backend API server
 - `packages/api`: Contains the backend API code.
 - `packages/client`: Contains the frontend application code.
 - `packages/shared`: Shared code between the client and server.
