@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User management
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      UserRole @default(INVESTOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  investments Investment[]
+  documents   Document[]
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  INVESTOR
+  MANAGER
+}
+
+// SCI - Société Civile Immobilière
+model SCI {
+  id          String   @id @default(uuid())
+  name        String
+  siret       String?  @unique
+  address     String?
+  capital     Decimal  @default(0)
+  description String?
+  status      SCIStatus @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  properties  Property[]
+  investments Investment[]
+  @@map("scis")
+}
+
+enum SCIStatus {
+  ACTIVE
+  INACTIVE
+  DISSOLVED
+}
+
+// Property (Bien immobilier)
+model Property {
+  id          String   @id @default(uuid())
+  sciId       String
+  name        String
+  address     String
+  city        String
+  postalCode  String
+  type        PropertyType
+  surface     Decimal?
+  value       Decimal
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  sci         SCI @relation(fields: [sciId], references: [id], onDelete: Cascade)
+  @@map("properties")
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  COMMERCIAL
+  LAND
+  PARKING
+  OTHER
+}
+
+// Investment (Parts sociales)
+model Investment {
+  id        String   @id @default(uuid())
+  userId    String
+  sciId     String
+  shares    Int
+  amount    Decimal
+  date      DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sci       SCI  @relation(fields: [sciId], references: [id], onDelete: Cascade)
+  @@map("investments")
+}
+
+// Documents (KYC, contracts, etc.)
+model Document {
+  id        String       @id @default(uuid())
+  userId    String
+  name      String
+  type      DocumentType
+  url       String
+  size      Int?
+  mimeType  String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  // Relations
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("documents")
+}
+
+enum DocumentType {
+  IDENTITY
+  PROOF_OF_ADDRESS
+  BANK_STATEMENT
+  CONTRACT
+  OTHER
+}
