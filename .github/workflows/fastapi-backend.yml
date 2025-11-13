@@ -1,0 +1,57 @@
+name: FastAPI Backend CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/fastapi-backend.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      working-directory: ./backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 black
+    
+    - name: Lint with flake8
+      working-directory: ./backend
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 app --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 app --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Check code formatting with black
+      working-directory: ./backend
+      run: |
+        black --check app
+    
+    - name: Validate Python syntax
+      working-directory: ./backend
+      run: |
+        python -m py_compile app/main.py app/auth.py app/db.py
+        python -m py_compile app/models/annonce.py
+        python -m py_compile app/routes/health.py app/routes/annonce.py
+    
+    - name: Test import modules
+      working-directory: ./backend
+      run: |
+        python -c "from app.main import app; print('✓ Main app imported successfully')"
+        python -c "from app.auth import create_access_token; print('✓ Auth module imported successfully')"
