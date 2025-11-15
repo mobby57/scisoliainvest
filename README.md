@@ -25,6 +25,79 @@ To get started with the project, follow these steps:
    pnpm dev
    ```
 
+## Python Testing Environment
+
+Pour les tests Python, nous fournissons des scripts automatisés pour configurer et utiliser un environnement virtuel Python.
+
+### Configuration rapide
+
+#### Linux/Mac
+
+Exécutez le script de configuration :
+
+```bash
+./setup_test_env.sh
+```
+
+Ce script va :
+1. Créer un environnement virtuel Python (`venv`)
+2. Activer l'environnement virtuel
+3. Installer les dépendances de test depuis `requirements-test.txt`
+4. Vérifier l'installation de pytest
+5. Exécuter les tests unitaires (si disponibles)
+
+#### Windows
+
+Exécutez le script batch :
+
+```batch
+setup_test_env.bat
+```
+
+Ce script effectue les mêmes opérations que la version Linux/Mac.
+
+### Utilisation manuelle
+
+Si vous préférez configurer l'environnement manuellement :
+
+#### Linux/Mac
+
+```bash
+# Créer l'environnement virtuel
+python3 -m venv venv
+
+# Activer l'environnement virtuel
+source venv/bin/activate
+
+# Installer les dépendances
+pip install -r requirements-test.txt
+
+# Exécuter les tests
+pytest
+```
+
+#### Windows
+
+```batch
+# Créer l'environnement virtuel
+python -m venv venv
+
+# Activer l'environnement virtuel
+venv\Scripts\activate
+
+# Installer les dépendances
+pip install -r requirements-test.txt
+
+# Exécuter les tests
+pytest
+```
+
+### Désactiver l'environnement virtuel
+
+```bash
+deactivate
+```
+
 ## Project Structure
 
 - `packages/api`: Contains the backend API code.
