@@ -37,7 +37,7 @@
   "dependencies": {
     "@aws-sdk/client-bedrock-runtime": "^3.922.0",
     "@aws-sdk/client-kms": "^3.922.0",
-    "@aws-sdk/client-qbusiness": "^3.922.0",
+    "@aws-sdk/client-qbusiness": "^3.932.0",
     "@aws-sdk/client-secrets-manager": "^3.922.0",
     "dayjs": "^1.11.19",
     "decimal.js": "^10.6.0",
